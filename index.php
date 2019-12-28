@@ -7,17 +7,28 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <title>主畫面</title>
+    <style type=text/css>
+    body{
+        background-image:url( https://img.tukuppt.com/bg_grid/00/11/74/HQ20FR39QQ.jpg!/fh/350 );
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
+    </style>
 </head>
 <body>
 
+    <div style="width:100%; text-align:center">
     <div class="btn-group" role="group" aria-label="Basic example">
         <form action="controller.php" method="post">
-            <button type="submit" name="btn" value="會員" class="btn btn-secondary">會員管理</button>
-            <button type="submit" name="btn" value="外送員" class="btn btn-secondary">外送員管理</button>
-            <button type="submit" name="btn" value="餐廳" class="btn btn-secondary">餐廳管理</button>
-            <button type="submit" name="btn" value="食物" class="btn btn-secondary">食物管理</button>
-            <button type="submit" name="btn" value="購買紀錄" class="btn btn-secondary">購買紀錄管理</button>
+        <br><br><br><br><br><br><br><button type="submit" name="btn" value="會員" class="btn-secondary btn-lg btn-block">會員管理</button><br>
+            <button type="submit" name="btn" value="外送員" class="btn btn-secondary btn-lg btn-block">外送員管理</button><br>
+            <button type="submit" name="btn" value="餐廳" class="btn btn-secondary btn-lg btn-block">餐廳管理</button><br>
+            <button type="submit" name="btn" value="食物" class="btn btn-secondary btn-lg btn-block">食物管理</button><br>
+            <button type="submit" name="btn" value="購買紀錄" class="btn btn-secondary btn-lg btn-block">購買紀錄管理</button>
         </form>
+    </div>
     </div>
 
 </body>
