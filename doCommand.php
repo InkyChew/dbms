@@ -117,6 +117,7 @@
                 $sql = "insert into restaurant values($temp)";
                 // echo $sql;
                 break;
+        }
     } else if ($tab == "購買紀錄"){
         switch ($mode){
             case "修改":
@@ -128,7 +129,7 @@
                 $sql = "update restaurant set name = '$name', tel = '$tel', name = '$name', address = '$address' where restaurantID = $no";                 
                 break;
             case "刪除":
-                $sql = "delete from restaurant where restaurantID = $no";
+                $sql = "delete from orderhistory where orderID = $no";
                 break;
             case "新增":  
                 $ary = $_SESSION['insertAry'];

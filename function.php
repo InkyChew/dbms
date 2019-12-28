@@ -36,10 +36,15 @@
             $sql = "select * from restaurant where restaurantID = $no";
             break;
         case "食物":
-            $ary = array("foodName", "restaurantName", "restaurant-tel", "price", "imageURL", "description");
-            $sql = "select f.name, r.name, r.tel, f.price, f.imageURL, f.description
-                    from food as f, restaurant as r 
-                    where foodID = $foodNo and f.restaurantID = $restNo and f.restaurantID = r.restaurantID";
+            if($mode == "修改"){
+                $ary = array("foodID", "restaurantID", "foodName", "price", "imageURL", "description");
+                $sql = "select * from food where foodID = $foodNo and restaurantID = $restNo";
+            }else{
+                $ary = array("foodName", "restaurantName", "restaurant-tel", "price", "imageURL", "description");
+                $sql = "select f.name, r.name, r.tel, f.price, f.imageURL, f.description
+                        from food as f, restaurant as r 
+                        where foodID = $foodNo and f.restaurantID = $restNo and f.restaurantID = r.restaurantID";
+            }                        
             break;
         case "購買紀錄":
             $ary = array("orderID", "memberName", "deliveryName", "creationDatetime", "arrived");
@@ -51,10 +56,17 @@
 
     $conn->query("SET NAMES utf8");
     if ($result = $conn->query($sql) ){
-        // echo "成功";       
-        $field = $ary[0];
-        echo "<tr> <td>$field:</td> <td>$no</td> </tr>";
-        
+        // echo "成功";
+        if ($tab == "食物") {
+            $field = $ary[0];
+            echo "<tr> <td>$field:</td> <td>$foodNo</td> </tr>";
+            $field = $ary[1];            
+            echo "<tr> <td>$field:</td> <td>$restNo</td> </tr>";
+        } else {
+            $field = $ary[0];
+            echo "<tr> <td>$field:</td> <td>$no</td> </tr>";
+        }
+
         $row = $result->fetch_row();
         if (empty($row)){ // 資料不存在
             echo "<br><br>";
@@ -70,7 +82,11 @@
                     if ($mode != "修改")
                         echo "<tr> <td>$field:</td> <td>$data</td> </tr>";
                     else
-                        echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";                        
+                        if($tab == "食物"){
+                            ++$i;
+                            $field = $ary[$i];
+                        }
+                        echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";                   
                 }                   
             }
             echo "</table><br>";
