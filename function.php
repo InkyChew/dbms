@@ -2,23 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?php session_start(); echo $_SESSION['mode'];?></title>
+    <title><?php session_start(); echo $_SESSION['tab'] . "管理-" . $_SESSION['mode'];?></title>
 </head>
 <body>
 
 <?php    
-    $title = "資料庫管理系統-" . $_SESSION['mode'];
+    $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
     echo "<h1>$title</h1>";    
 ?>
 <hr>
-<form action="controler.php" method="post">
+<form action="controller.php" method="post">
     
 <?php
     $no = $_SESSION['no'];
+    $foodNo = $_SESSION['foodNo'];
+    $restNo = $_SESSION['restNo'];
+    $tab = $_SESSION['tab'];
     $mode = $_SESSION['mode'];
-    $ary = array("memberID", "account", "password","name", "gender", "birthday", "email");
+
     $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
-    $sql = "select * from member where memberID = $no";
+
+    switch ($tab) {
+        case "會員":
+            $ary = array("memberID", "account", "password","name", "gender", "birthday", "email");
+            $sql = "select * from member where memberID = $no";
+            break;
+        case "外送員":
+            $ary = array("deliveryStaffID", "name", "tel");
+            $sql = "select * from deliverystaff where deliveryStaffID = $no";
+            break;
+        case "餐廳":
+            $ary = array("restaurantID", "name", "tel", "address");
+            $sql = "select * from restaurant where restaurantID = $no";
+            break;
+        case "食物":
+            $ary = array("foodName", "restaurantName", "restaurant-tel", "price", "imageURL", "description");
+            $sql = "select f.name, r.name, r.tel, f.price, f.imageURL, f.description
+                    from food as f, restaurant as r 
+                    where foodID = $foodNo and f.restaurantID = $restNo and f.restaurantID = r.restaurantID";
+            break;
+        case "購買紀錄":
+            $ary = array("restaurantID", "name", "tel", "address");
+            $sql = "select * from restaurant where restaurantID = $no";
+            break;
+    }
+
     $conn->query("SET NAMES utf8");
     if ($result = $conn->query($sql) ){
         // echo "成功";       
@@ -40,17 +68,17 @@
                     if ($mode != "修改")
                         echo "<tr> <td>$field:</td> <td>$data</td> </tr>";
                     else
-                        echo "<tr> <td>$field:</td> <td><input type='text' name='mary[]' value=$data size='30'></td> </tr>";                        
+                        echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";                        
                 }                   
             }
             echo "</table><br>";
             switch ($mode){
                 case "查詢": 
-                    echo "<button type='submit' name='btn' value=$mode>回" . $mode . "主畫面</button>&nbsp;<button type='submit' name='btn'>主畫面</button>";
+                    echo "<button type='submit' name='btn' value=$mode>回" . $tab . "查詢</button>&nbsp;<button type='submit' name='btn' value=$tab>回" . $tab . "管理</button>";
                     break;
                 case "修改": 
                     echo "<button type='submit' name='btn' value='goSQL'>" . "修改" . "</button>&nbsp;";
-                    echo "<button type='submit' name='btn' value=$mode>回" . $mode . "主畫面</button>&nbsp;<button type='submit' name='btn'>主畫面</button>";
+                    echo "<button type='submit' name='btn' value=$mode>回" . $tab . "修改</button>&nbsp;<button type='submit' name='btn' value=$tab>回" . $tab . "管理</button>";
                     break;
                 case "刪除":
                     echo "<font color='red'>是否真的要刪除?</font>";

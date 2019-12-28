@@ -6,19 +6,22 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <title>主畫面</title>
+    <title><?php session_start(); echo $_SESSION['tab'] . '管理';?></title>
 </head>
 <body>
+    <?php    
+        $title = $_SESSION['tab'] . "管理";
+        echo "<h1>$title</h1>";    
+    ?>
+    <hr>
 
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <form action="controller.php" method="post">
-            <button type="submit" name="btn" value="會員" class="btn btn-secondary">會員管理</button>
-            <button type="submit" name="btn" value="外送員" class="btn btn-secondary">外送員管理</button>
-            <button type="submit" name="btn" value="餐廳" class="btn btn-secondary">餐廳管理</button>
-            <button type="submit" name="btn" value="食物" class="btn btn-secondary">食物管理</button>
-            <button type="submit" name="btn" value="購買紀錄" class="btn btn-secondary">購買紀錄管理</button>
-        </form>
-    </div>
+    <form action="controller.php" method="post">
+        1. <button type="submit" name="btn" value="查詢">查詢</button><br><br>
+        2. <button type="submit" name="btn" value="新增">新增</button><br><br>
+        3. <button type="submit" name="btn" value="修改">修改</button><br><br>
+        4. <button type="submit" name="btn" value="刪除">刪除</button><br>
+        <button type="submit" name="btn" value="回主畫面">回主畫面</button>
+    </form>
 
 </body>
 </html>
