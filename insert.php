@@ -70,12 +70,12 @@
                         echo "<tr> <td>$field:</td> <td>
                             <div class='form-group row'>
                                 <div class='form-check form-check-inline'>
-                                    <input class='form-check-input' type='radio' id='gridCheck1'>
-                                    <label class='form-check-label' for='gridCheck1'>是</label>
+                                    <input class='form-check-input' type='radio' name='arrive' id='inlineRadio1' value='yes'>
+                                    <label class='form-check-label' for='inlineRadio1'>是</label>
                                 </div>
                                 <div class='form-check form-check-inline'>
-                                    <input class='form-check-input' type='radio' id='gridCheck1'>
-                                    <label class='form-check-label' for='gridCheck1'>否</label>
+                                    <input class='form-check-input' type='radio' name='arrive' id='inlineRadio2' value='no'>
+                                    <label class='form-check-label' for='inlineRadio2'>否</label>
                                 </div>
                             </div>
                         </td></tr>";
