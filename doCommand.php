@@ -23,7 +23,7 @@
     if ($tab == "會員") {
         switch ($mode){
             case "修改":
-                $ary = $_SESSION['update'];        
+                $ary = $_SESSION['update'];
                 $account = $ary[0];
                 $password = $ary[1];
                 $name = $ary[2];
@@ -48,13 +48,98 @@
                 break;
         }
     }else if ($tab == "外送員"){
-
+        switch ($mode){
+            case "修改":
+                $ary = $_SESSION['update'];
+                $name = $ary[0];
+                $tel = $ary[1];
+                // print_r($ary);
+                $sql = "update deliverystaff set name = '$name', tel = '$tel' where deliveryStaffID = $no";                 
+                break;
+            case "刪除":
+                $sql = "delete from deliverystaff where deliverystaffID = $no";
+                break;
+            case "新增":  
+                $ary = $_SESSION['insertAry'];
+                $temp = $ary[0];
+                foreach ($ary as $i => $data){
+                    if ($i != 0)
+                        $temp = $temp . ", '" . $data . "'";
+                }
+                $sql = "insert into deliverystaff values($temp)";
+                // echo $sql;
+                break;
+        }
     } else if ($tab == "餐廳"){
-
+        switch ($mode){
+            case "修改":
+                $ary = $_SESSION['update'];
+                $name = $ary[0];
+                $tel = $ary[1];
+                $address = $ary[2];
+                // print_r($ary);
+                $sql = "update restaurant set name = '$name', tel = '$tel', name = '$name', address = '$address' where restaurantID = $no";                 
+                break;
+            case "刪除":
+                $sql = "delete from restaurant where restaurantID = $no";
+                break;
+            case "新增":  
+                $ary = $_SESSION['insertAry'];
+                $temp = $ary[0];
+                foreach ($ary as $i => $data){
+                    if ($i != 0)
+                        $temp = $temp . ", '" . $data . "'";
+                }
+                $sql = "insert into restaurant values($temp)";
+                // echo $sql;
+                break;
+        }
     } else if ($tab == "食物"){
-
+        switch ($mode){
+            case "修改":
+                $ary = $_SESSION['update'];
+                $name = $ary[0];
+                $tel = $ary[1];
+                $address = $ary[2];
+                // print_r($ary);
+                $sql = "update restaurant set name = '$name', tel = '$tel', name = '$name', address = '$address' where restaurantID = $no";                 
+                break;
+            case "刪除":
+                $sql = "delete from restaurant where restaurantID = $no";
+                break;
+            case "新增":  
+                $ary = $_SESSION['insertAry'];
+                $temp = $ary[0];
+                foreach ($ary as $i => $data){
+                    if ($i != 0)
+                        $temp = $temp . ", '" . $data . "'";
+                }
+                $sql = "insert into restaurant values($temp)";
+                // echo $sql;
+                break;
     } else if ($tab == "購買紀錄"){
-
+        switch ($mode){
+            case "修改":
+                $ary = $_SESSION['update'];
+                $name = $ary[0];
+                $tel = $ary[1];
+                $address = $ary[2];
+                // print_r($ary);
+                $sql = "update restaurant set name = '$name', tel = '$tel', name = '$name', address = '$address' where restaurantID = $no";                 
+                break;
+            case "刪除":
+                $sql = "delete from restaurant where restaurantID = $no";
+                break;
+            case "新增":  
+                $ary = $_SESSION['insertAry'];
+                $temp = $ary[0];
+                foreach ($ary as $i => $data){
+                    if ($i != 0)
+                        $temp = $temp . ", '" . $data . "'";
+                }
+                $sql = "insert into restaurant values($temp)";
+                // echo $sql;
+                break;
     }
 
     if ($conn->query($sql)){ // 成功
