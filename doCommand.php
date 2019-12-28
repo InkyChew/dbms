@@ -9,41 +9,52 @@
 <?php    
     $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
     echo "<h1>$title</h1>";
-    $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
-    $conn->query("SET NAMES utf8");
-    $tab = $_SESSION['tab'];
-    $mode = $_SESSION['mode'];
-    $no = $_SESSION['no'];
 ?>
     <hr><br><br>
     <form action="controller.php" method="post">
 
 <?php
-    switch ($mode){
-        case "修改":
-            $ary = $_SESSION['update'];        
-            $account = $ary[0];
-            $password = $ary[1];
-            $name = $ary[2];
-            $gender = $ary[3];
-            $birthday = $ary[4];
-            $email = $ary[5];
-            // print_r($ary);
-            $sql = "update member set account = '$account', password = '$password', name = '$name', gender = '$gender', birthday = '$birthday', email = '$email' where memberID = $no";                 
-            break;
-        case "刪除":
-            $sql = "delete from member where memberID = $no";
-            break;
-        case "新增":  
-            $ary = $_SESSION['insertAry'];
-            $temp = $ary[0];
-            foreach ($ary as $i => $data){
-                if ($i != 0)
-                    $temp = $temp . ", '" . $data . "'";
-            }
-            $sql = "insert into member values($temp)";
-            // echo $sql;
-            break;        
+    $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
+    $conn->query("SET NAMES utf8");
+    $tab = $_SESSION['tab'];
+    $mode = $_SESSION['mode'];
+    $no = $_SESSION['no'];
+
+    if ($tab == "會員") {
+        switch ($mode){
+            case "修改":
+                $ary = $_SESSION['update'];        
+                $account = $ary[0];
+                $password = $ary[1];
+                $name = $ary[2];
+                $gender = $ary[3];
+                $birthday = $ary[4];
+                $email = $ary[5];
+                // print_r($ary);
+                $sql = "update member set account = '$account', password = '$password', name = '$name', gender = '$gender', birthday = '$birthday', email = '$email' where memberID = $no";                 
+                break;
+            case "刪除":
+                $sql = "delete from member where memberID = $no";
+                break;
+            case "新增":  
+                $ary = $_SESSION['insertAry'];
+                $temp = $ary[0];
+                foreach ($ary as $i => $data){
+                    if ($i != 0)
+                        $temp = $temp . ", '" . $data . "'";
+                }
+                $sql = "insert into member values($temp)";
+                // echo $sql;
+                break;
+        }
+    }else if ($tab == "外送員"){
+
+    } else if ($tab == "餐廳"){
+
+    } else if ($tab == "食物"){
+
+    } else if ($tab == "購買紀錄"){
+
     }
 
     if ($conn->query($sql)){ // 成功

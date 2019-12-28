@@ -42,8 +42,10 @@
                     where foodID = $foodNo and f.restaurantID = $restNo and f.restaurantID = r.restaurantID";
             break;
         case "購買紀錄":
-            $ary = array("restaurantID", "name", "tel", "address");
-            $sql = "select * from restaurant where restaurantID = $no";
+            $ary = array("orderID", "memberName", "deliveryName", "creationDatetime", "arrived");
+            $sql = "select o.orderID, m.name, d.name, o.creationDatetime, o.arrived
+                    from orderhistory as o, member as m, deliverystaff as d
+                    where orderID = $no and o.memberID = m.memberID and o.deliveryStaffID = d.deliveryStaffID";
             break;
     }
 
