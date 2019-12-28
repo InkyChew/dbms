@@ -16,10 +16,11 @@
 <body>
 
 <?php    
-    $title = "資料庫管理系統-" . $_SESSION['mode'];
-    echo "<h1>$title</h1>";
     $tab = $_SESSION['tab'];
     $mode = $_SESSION['mode'];
+    $title = $tab . "管理-" . $mode;
+    echo "<h1>$title</h1>";
+    
 ?>
     <hr>
     <form action="controller.php" method="post">

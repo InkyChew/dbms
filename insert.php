@@ -47,7 +47,6 @@
                 break;
         }
 
-        // $ary = array("memberID", "account", "password","name", "gender", "birthday", "email");
         echo "<table>";
         switch ($tab) {
             case "會員": case "外送員": case "餐廳":
@@ -80,11 +79,11 @@
                         echo "<tr> <td>$field:</td> <td>
                             <div class='form-group row'>
                                 <div class='form-check form-check-inline'>
-                                    <input class='form-check-input' type='radio' name='arrive' id='inlineRadio1' value='yes'>
+                                    <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio1' value='1'>
                                     <label class='form-check-label' for='inlineRadio1'>是</label>
                                 </div>
                                 <div class='form-check form-check-inline'>
-                                    <input class='form-check-input' type='radio' name='arrive' id='inlineRadio2' value='no'>
+                                    <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio2' value='0'>
                                     <label class='form-check-label' for='inlineRadio2'>否</label>
                                 </div>
                             </div>

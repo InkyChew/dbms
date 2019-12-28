@@ -5,7 +5,9 @@
     <title><?php session_start(); echo $_SESSION['tab'] . "管理-" . $_SESSION['mode'];?></title>
     <style type=text/css>
     body{
-        background-image:url( https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-pure-hand-painted-literary-minimalist-border-background-hand-drawingwatercolorplantflowersliteraryweddinggreeting-cardbackgroundmaterialframesimple-image_87164.jpg );
+        background-image:url( https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/
+                                pngtree-pure-hand-painted-literary-minimalist-border-background-hand-drawingwatercolorplant
+                                flowersliteraryweddinggreeting-cardbackgroundmaterialframesimple-image_87164.jpg );
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
