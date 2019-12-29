@@ -19,6 +19,7 @@
     </style>
 </head>
 <body>
+    <div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
     <?php    
         $title = $_SESSION['tab'] . "管理";
         echo "<h1 align=\"center\">$title</h1>";    

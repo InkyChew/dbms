@@ -18,7 +18,7 @@
     </style>
 </head>
 <body>
-    <h1>YunTech Eat</h1>
+    <div style="text-align:center;"><h1>YunTech Eat</h1></div>
     <div style="width:100%; text-align:center">
     <div class="btn-group" role="group" aria-label="Basic example">
         <form action="controller.php" method="post">

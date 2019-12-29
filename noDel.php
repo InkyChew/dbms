@@ -5,7 +5,7 @@
     <title><?php session_start(); echo $_SESSION['mode'];?></title>
     <style type=text/css>
     body{
-        background-image:url( https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-pure-hand-painted-literary-minimalist-border-background-hand-drawingwatercolorplantflowersliteraryweddinggreeting-cardbackgroundmaterialframesimple-image_87164.jpg );
+        background-image:url( https://www.mokuge.com/uploads/userup/505/1555502307.jpg );
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-
+<div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
 <?php    
     $tab = $_SESSION['tab'];
     $mode = $_SESSION['mode'];
