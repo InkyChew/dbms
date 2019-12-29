@@ -9,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style type=text/css>
         body{
-            background-image:url( https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-pure-hand-painted-literary-minimalist-border-background-hand-drawingwatercolorplantflowersliteraryweddinggreeting-cardbackgroundmaterialframesimple-image_87164.jpg );
+            background-image:url( https://www.mokuge.com/uploads/userup/505/1555502307.jpg );
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
@@ -18,10 +18,10 @@
     </style>
 </head>
 <body>
-
+<div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
 <?php    
     $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
-    echo "<h1>$title</h1>";
+    echo "<h1 align=\"center\">$title</h1>";
 ?>
     <hr><br><br>
     <form action="controller.php" method="post">

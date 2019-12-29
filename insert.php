@@ -10,7 +10,7 @@
 
     <style type=text/css>
     body{
-        background-image:url( https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-pure-hand-painted-literary-minimalist-border-background-hand-drawingwatercolorplantflowersliteraryweddinggreeting-cardbackgroundmaterialframesimple-image_87164.jpg );
+        background-image:url( https://www.mokuge.com/uploads/userup/505/1555502307.jpg );
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
@@ -19,16 +19,19 @@
     </style>
 </head>
 <body>
-
+    <div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
     <?php    
         $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
-        echo "<h1>$title</h1>";    
+        echo "<h1 align=\"center\">$title</h1>";    
     ?>
     <hr>
 <form action="controller.php" method="post">
     
     <?php
-        $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
+        $conn = new mysqli("localhost", "root", "", "b10623019hw1");
+        if($conn->connect_error){
+            die("連接資料庫失敗" . $conn->connect_error);
+        }
         $conn->query("SET NAMES utf8");
 
         $tab = $_SESSION['tab'];
@@ -54,9 +57,14 @@
         switch ($tab) {
             case "會員": case "外送員": case "餐廳":
                 for ($i = 0; $i < count($ary); $i++) {
-                    $field = $ary[$i];
-                    echo "<tr> <td>$field:</td> <td><input type='text' name='insertAry[]' size='30'></td> </tr>";
-                }
+                    if($i ==5){
+                        $field = $ary[$i];
+                        echo "<tr> <td>$field:</td> <td><input type='date' name='insertAry[]'></td> </tr>";
+                    }else{
+                        $field = $ary[$i];
+                        echo "<tr> <td>$field:</td> <td><input type='text' name='insertAry[]' size='30'></td> </tr>";
+                    }  
+               }
                 break;
             case "食物":
                 for ($i = 0; $i < count($ary); $i++) {

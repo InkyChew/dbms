@@ -5,9 +5,7 @@
     <title><?php session_start(); echo $_SESSION['tab'] . "管理-" . $_SESSION['mode'];?></title>
     <style type=text/css>
     body{
-        background-image:url( https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/
-                                pngtree-pure-hand-painted-literary-minimalist-border-background-hand-drawingwatercolorplant
-                                flowersliteraryweddinggreeting-cardbackgroundmaterialframesimple-image_87164.jpg );
+        background-image:url(https://www.mokuge.com/uploads/userup/505/1555502307.jpg);
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
@@ -16,10 +14,10 @@
     </style>
 </head>
 <body>
-
+<div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
 <?php    
     $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
-    echo "<h1>$title</h1>";    
+    echo "<h1 align=\"center\">$title</h1>";    
 ?>
 <hr>
 <form action="controller.php" method="post">
@@ -36,8 +34,11 @@
         $restNo = $_SESSION['restNo'];
     }
 
-    $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
-
+    $conn = new mysqli("localhost", "root", "", "b10623019hw1");
+    if($conn->connect_error){
+        die("連接資料庫失敗" . $conn->connect_error);
+    }
+    
     switch ($tab) {
         case "會員":
             $ary = array("memberID", "account", "password","name", "gender", "birthday", "email");
@@ -75,9 +76,9 @@
         // echo "成功";
         if ($tab == "食物") {
             $field = "foodID";
-            echo "<tr> <td>$field:</td> <td>$foodNo</td> </tr>";
+            echo "<tr> <td><font color='red'>&nbsp$field:</font></td> <td>$foodNo ,&nbsp</td> </tr>";
             $field = "restaurantID";            
-            echo "<tr> <td>$field:</td> <td>$restNo</td> </tr>";
+            echo "<tr> <td><font color='red'>$field:</font></td> <td>$restNo</td> </tr>";
         } else {
             $field = $ary[0];
             echo "<tr> <td>$field:</td> <td>$no</td> </tr>";
@@ -129,8 +130,6 @@
 ?>
 
 </form><br>
-
-
 <br><hr>
 
 </body>
