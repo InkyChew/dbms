@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- 主機： 127.0.0.1
+-- 主機: 127.0.0.1
 -- 產生時間： 
--- 伺服器版本： 10.4.8-MariaDB
--- PHP 版本： 7.1.32
+-- 伺服器版本: 10.1.29-MariaDB
+-- PHP 版本： 7.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -35,7 +35,7 @@ CREATE TABLE `deliverystaff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 傾印資料表的資料 `deliverystaff`
+-- 資料表的匯出資料 `deliverystaff`
 --
 
 INSERT INTO `deliverystaff` (`deliveryStaffID`, `name`, `tel`) VALUES
@@ -60,7 +60,7 @@ CREATE TABLE `food` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 傾印資料表的資料 `food`
+-- 資料表的匯出資料 `food`
 --
 
 INSERT INTO `food` (`foodID`, `name`, `restaurantID`, `price`, `imageURL`, `description`) VALUES
@@ -92,10 +92,11 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 傾印資料表的資料 `member`
+-- 資料表的匯出資料 `member`
 --
 
 INSERT INTO `member` (`memberID`, `account`, `password`, `name`, `gender`, `birthday`, `email`) VALUES
+(1, 'yuntech01', 'pwd01', 'member01', 1, '1998-03-08', 'yuntech01@gmail.com'),
 (2, 'yuntech02', 'pwd02', 'member02', 0, '1999-10-30', 'yuntech02@gmail.com'),
 (3, 'yuntech03', 'pwd03', 'member03', 1, '1998-01-07', 'yuntech03@gmail.com'),
 (4, 'yuntech04', 'pwd04', 'member04', 0, '1998-05-18', 'yuntech04@gmail.com'),
@@ -120,10 +121,13 @@ CREATE TABLE `orderdetail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 傾印資料表的資料 `orderdetail`
+-- 資料表的匯出資料 `orderdetail`
 --
 
 INSERT INTO `orderdetail` (`orderID`, `restaurantID`, `foodID`, `foodCount`) VALUES
+(1, 1, 1, 2),
+(1, 2, 1, 3),
+(1, 3, 1, 16),
 (2, 1, 2, 3),
 (2, 2, 2, 3),
 (2, 4, 1, 6),
@@ -155,10 +159,11 @@ CREATE TABLE `orderhistory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 傾印資料表的資料 `orderhistory`
+-- 資料表的匯出資料 `orderhistory`
 --
 
 INSERT INTO `orderhistory` (`orderID`, `memberID`, `deliveryStaffID`, `creationDatetime`, `arrived`) VALUES
+(1, 1, 1, '2019-11-27 03:25:15', 1),
 (2, 2, 2, '2019-11-27 03:55:15', 0),
 (3, 3, 3, '2019-11-27 04:05:10', 1),
 (4, 4, 4, '2019-11-27 03:15:05', 1),
@@ -183,7 +188,7 @@ CREATE TABLE `restaurant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 傾印資料表的資料 `restaurant`
+-- 資料表的匯出資料 `restaurant`
 --
 
 INSERT INTO `restaurant` (`restaurantID`, `name`, `tel`, `address`) VALUES
@@ -212,10 +217,10 @@ CREATE TABLE `restaurantreportview` (
 --
 DROP TABLE IF EXISTS `restaurantreportview`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `restaurantreportview`  AS  select `r`.`name` AS `餐廳`,`f`.`name` AS `餐點`,sum(`o`.`foodCount`) AS `被購買數量`,sum(`f`.`price` * `o`.`foodCount`) AS `銷售總額` from ((`orderdetail` `o` join `restaurant` `r`) join `food` `f`) where `o`.`restaurantID` = `r`.`restaurantID` and `o`.`foodID` = `f`.`foodID` and `r`.`restaurantID` = `f`.`restaurantID` group by `f`.`name` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `restaurantreportview`  AS  select `r`.`name` AS `餐廳`,`f`.`name` AS `餐點`,sum(`o`.`foodCount`) AS `被購買數量`,sum((`f`.`price` * `o`.`foodCount`)) AS `銷售總額` from ((`orderdetail` `o` join `restaurant` `r`) join `food` `f`) where ((`o`.`restaurantID` = `r`.`restaurantID`) and (`o`.`foodID` = `f`.`foodID`) and (`r`.`restaurantID` = `f`.`restaurantID`)) group by `f`.`name` ;
 
 --
--- 已傾印資料表的索引
+-- 已匯出資料表的索引
 --
 
 --
@@ -261,29 +266,29 @@ ALTER TABLE `restaurant`
   ADD PRIMARY KEY (`restaurantID`);
 
 --
--- 已傾印資料表的限制式
+-- 已匯出資料表的限制(Constraint)
 --
 
 --
--- 資料表的限制式 `food`
+-- 資料表的 Constraints `food`
 --
 ALTER TABLE `food`
   ADD CONSTRAINT `food_ibfk_1` FOREIGN KEY (`restaurantID`) REFERENCES `restaurant` (`restaurantID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- 資料表的限制式 `orderdetail`
+-- 資料表的 Constraints `orderdetail`
 --
 ALTER TABLE `orderdetail`
-  ADD CONSTRAINT `orderdetail_ibfk_1` FOREIGN KEY (`foodID`) REFERENCES `food` (`foodID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orderdetail_ibfk_2` FOREIGN KEY (`restaurantID`) REFERENCES `food` (`restaurantID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orderdetail_ibfk_3` FOREIGN KEY (`orderID`) REFERENCES `orderhistory` (`orderID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orderdetail_ibfk_1` FOREIGN KEY (`foodID`) REFERENCES `food` (`foodID`),
+  ADD CONSTRAINT `orderdetail_ibfk_2` FOREIGN KEY (`restaurantID`) REFERENCES `food` (`restaurantID`),
+  ADD CONSTRAINT `orderdetail_ibfk_3` FOREIGN KEY (`orderID`) REFERENCES `orderhistory` (`orderID`);
 
 --
--- 資料表的限制式 `orderhistory`
+-- 資料表的 Constraints `orderhistory`
 --
 ALTER TABLE `orderhistory`
-  ADD CONSTRAINT `orderhistory_ibfk_1` FOREIGN KEY (`deliveryStaffID`) REFERENCES `deliverystaff` (`deliveryStaffID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `orderhistory_ibfk_2` FOREIGN KEY (`memberID`) REFERENCES `member` (`memberID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orderhistory_ibfk_1` FOREIGN KEY (`deliveryStaffID`) REFERENCES `deliverystaff` (`deliveryStaffID`),
+  ADD CONSTRAINT `orderhistory_ibfk_2` FOREIGN KEY (`memberID`) REFERENCES `member` (`memberID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
