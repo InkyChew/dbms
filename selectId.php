@@ -44,7 +44,7 @@
                     // $sql = "select foodID, restaurantID from food";
                     $result = $conn->query($sql);
                     $rows = $result->num_rows;
-                    echo "<select name='restNo'>";
+                    echo "<select id='rest' name='restNo' onchange='renew()'>";
                         for($j=0; $j<$rows; $j++){
                             $row = $result->fetch_row();
                             foreach($row as $rest){
@@ -56,11 +56,11 @@
                     $sql = "select foodID from food where restaurantID = $rest order by foodID ASC";
                     $result = $conn->query($sql);
                     $rows = $result->num_rows;
-                    echo "<select name='foodNo'>";
+                    echo "<select id='food' name='foodNo'>";
                         for($j=0; $j<$rows; $j++){
                             $row = $result->fetch_row();
-                            foreach($row as $rest){
-                                echo "<option value='$rest'>". $rest. "</option>";
+                            foreach($row as $food){
+                                echo "<option value='$rest'>". $food. "</option>";
                             }
                         }
                     echo "</select><br><br>";
@@ -69,14 +69,6 @@
                 case "購買紀錄":
                     $sql = "select orderID from orderhistory order by orderID ASC";
                     break;
-                default:
-                    
-                    break;
-                // case '食物':
-                //     echo "foodID: <input type='int' name='foodNo'><br><br>";
-                //     echo "restaurantID: <input type='int' name='restNo'><br><br>";
-                //     echo "<button type='submit' name='btn' value='goFoodSQL'>". $_SESSION['mode']. "</button>";
-                //     break;
             }
             if($tab != "食物"){
                 echo $tab . "ID: ";
@@ -101,6 +93,7 @@
     </form>
     </div>
     <hr>
+
 </body>
 </html>
 

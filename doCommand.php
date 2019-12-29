@@ -27,7 +27,10 @@
     <form action="controller.php" method="post">
 
 <?php
-    $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
+    $conn = new mysqli("localhost", "root", "", "b10623019hw1");
+    if($conn->connect_error){
+        die("連接資料庫失敗" . $conn->connect_error);
+    }
     $conn->query("SET NAMES utf8");
     $tab = $_SESSION['tab'];
     $mode = $_SESSION['mode'];
@@ -134,11 +137,15 @@
                 break;
             case "新增":  
                 $ary = $_SESSION['insertAry'];
-                // print_r($ary);
+                print_r($ary);
                 $temp = $ary[0] . "," . $ary[1];
                 foreach ($ary as $i => $data){
-                    if ($i > 1)
-                        $temp = $temp . "," . $data;
+                    if ($i >= 2){
+                        if($i == 3)
+                        $temp =  $temp . "," . $ary[3];
+                        else
+                            $temp = $temp . ", '" . $data . "'";
+                    }                        
                 }
                 print_r($temp);
                 $sql = "insert into food values($temp)";
@@ -168,12 +175,20 @@
                     if ($i != 0)
                         $temp = $temp . ", '" . $data . "'";
                 }
+                print_r($temp);
                 $sql = "insert into orderhistory values($temp)";
                 // echo $sql;
                 break;
         }
     }
 
+    // try{
+    //     if ($conn->query($sql)) // 成功
+    //         echo "<font class='alert alert-success'>！資料" . $_SESSION['mode'] . "成功！</font>";
+    // }catch(Exception $e){
+    //     echo "<font class='alert alert-danger'>！資料" . $mode . "失敗！</font>";  
+    //     echo $e->getMessage();
+    // }
     if ($conn->query($sql)){ // 成功
         echo "<font class='alert alert-success'>！資料" . $_SESSION['mode'] . "成功！</font>";
     }else{ // 失敗
