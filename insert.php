@@ -50,7 +50,31 @@
         switch ($tab) {
             case "會員": case "外送員": case "餐廳":
                 for ($i = 0; $i < count($ary); $i++) {
-                    if($i ==5){
+                    if($i == 0){
+                        switch($tab){
+                            case "會員":
+                                $sql = "select MAX(memberID) from member";
+                                $result = $conn->query($sql);
+                                $rows = $result->fetch_row();
+                                $rows = $rows[0] + 1;
+                                echo "memberID: " . $rows . "<br><br>";
+                                break;
+                            case "外送員":
+                                $sql = "select MAX(deliveryStaffID) from deliverystaff";
+                                $result = $conn->query($sql);
+                                $rows = $result->fetch_row();
+                                $rows = $rows[0] + 1;
+                                echo "deliveryStaffID: " . $rows . "<br><br>";
+                                break;
+                            case "餐廳":
+                                $sql = "select MAX(restaurantID) from restaurant";
+                                $result = $conn->query($sql);
+                                $rows = $result->fetch_row();
+                                $rows = $rows[0] + 1;
+                                echo "restaurantID: " . $rows . "<br><br>";
+                                break;
+                        } 
+                    }else if($i ==5){
                         $field = $ary[$i];
                         echo "<tr> <td>$field:</td> <td><input type='date' name='insertAry[]'></td> </tr>";
                     }else{
@@ -61,7 +85,13 @@
                 break;
             case "食物":
                 for ($i = 0; $i < count($ary); $i++) {
-                    if($i == 1){
+                    if($i == 0){
+                        $sql = "select MAX(foodID) from food";
+                        $result = $conn->query($sql);
+                        $rows = $result->fetch_row();
+                        $rows = $rows[0] + 1;
+                        echo "foodID: " . $rows . "<br><br>";
+                    }else if($i == 1){
                         $field = $ary[$i];
                         $sql = "select restaurantID from restaurant";
                         $result = $conn->query($sql);
@@ -94,7 +124,7 @@
                         $result = $conn->query($sql);
                         $rows = $result->fetch_row();
                         $rows = $rows[0] + 1;
-                        echo "orderId:" . $rows . "<br><br>";
+                        echo "orderId: " . $rows . "<br><br>";
                     }else if($i == 1){
                         $sql = "select memberID from member order by memberID ASC";
                     }else if($i == 2){
