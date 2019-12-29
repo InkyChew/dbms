@@ -101,25 +101,35 @@
             case "食物":
                 for ($i = 0; $i < count($ary); $i++) {
                     if($i == 0){
-                        $sql = "select MAX(foodID) from food";
-                        $result = $conn->query($sql);
-                        $rows = $result->fetch_row();
-                        $rows = $rows[0] + 1;
+                        if(isset($_GET["restNo"])){
+                            $restNo = $_GET["restNo"];
+                            $sql = "select MAX(foodID) from food where restaurantID = $restNo order by foodID ASC";
+                            $result = $conn->query($sql);
+                            $rows = $result->fetch_row();
+                            $rows = $rows[0] + 1;
+                        }                    
                         echo "foodID: <input name='insertAry[]' readonly value=". $rows.">";
                     }else if($i == 1){
                         $field = $ary[$i];
-                        $sql = "select restaurantID from restaurant";
+                        $sql = "select restaurantID from restaurant order by restaurantID ASC";
                         $result = $conn->query($sql);
                         $rows = $result->num_rows;
                         echo "<tr> <td>$field:</td>";
-                        echo "<td><select name='insertAry[]'>";
+                        echo "<td><select name='insertAry[]' onchange='renew(this.value)'>";
                             for($j=0; $j<$rows; $j++){
                                 $row = $result->fetch_row();
                                 foreach($row as $data){
-                                    echo "<option value='$data'>". $data. "</option>";
+                                    $selected = "";
+                                    if($data === $_GET["restNo"]){
+                                        $selected = "selected";
+                                    }
+                                    echo "<option value='$data' $selected>". $data . "</option>";
                                 }
                             }
                         echo "</select></td> </tr>";
+                    }else if($i == 3){
+                        $field = $ary[$i];
+                        echo "<tr> <td>$field:</td> <td><input type='number' name='insertAry[]'></td> </tr>";
                     }else if($i == 4){
                         $field = $ary[$i];
                         echo "<tr> <td>$field:</td> <td><input type='text' name='insertAry[]' size='30'></td> </tr>";
@@ -139,7 +149,7 @@
                         $result = $conn->query($sql);
                         $rows = $result->fetch_row();
                         $rows = $rows[0] + 1;
-                        echo "orderID: <input name='insertAry[]' readonly value=". $rows.">";
+                        echo "orderID: <input name='insertAry[]' readonly value=". $rows."><br><br>";
                     }else if($i == 1){
                         $sql = "select memberID from member order by memberID ASC";
                     }else if($i == 2){
@@ -194,6 +204,12 @@
 
 
 <br><hr>
+
+    <script>
+        function renew(restNo){
+            window.location.href = "insert.php?restNo="+ restNo;
+        }
+    </script>
 
 </body>
 </html>

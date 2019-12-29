@@ -130,7 +130,6 @@
                 break;
             case "新增":  
                 $ary = $_SESSION['insertAry'];
-                print_r($ary);
                 $temp = $ary[0] . "," . $ary[1];
                 foreach ($ary as $i => $data){
                     if ($i >= 2){
@@ -140,9 +139,7 @@
                             $temp = $temp . ", '" . $data . "'";
                     }                        
                 }
-                print_r($temp);
-                $sql = "insert into food values($temp)";
-                // echo $sql;
+                $sql = "insert into food (foodID, restaurantID, name, price, imageURL, description) values($temp)";
                 break;
         }
     } else if ($tab == "購買紀錄"){
@@ -168,7 +165,6 @@
                     if ($i != 0)
                         $temp = $temp . ", '" . $data . "'";
                 }
-                echo($temp);
                 $sql = "insert into orderhistory values($temp)";
                 // echo $sql;
                 break;

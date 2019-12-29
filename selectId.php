@@ -72,7 +72,11 @@
                             }
                         }
                     echo "</select><br><br>";
-                    echo "<button type='submit' name='btn' value='goFoodSQL'>". $_SESSION['mode']. "</button>";
+                        if(isset($_GET["restNo"]))
+                            echo "<button type='submit' name='btn' value='goFoodSQL'>". $_SESSION['mode']. "</button>";
+                        else
+                            echo "<button type='submit' disabled>". $_SESSION['mode']. "</button>";
+                    
                     break;
                 case "購買紀錄":
                     $sql = "select orderID from orderhistory order by orderID ASC";
@@ -105,22 +109,6 @@
     <script>
         function renew(restNo){
             window.location.href = "selectId.php?restNo="+ restNo;
-            // var xmlhttp = new XMLHttpRequest();
-            // xmlhttp.onreadystatechange = function() {
-            //     if (this.readyState == 4 && this.status == 200) {
-            //         document.getElementById("txtHint").innerHTML = this.responseText;
-            //     }
-            // };
-            // xmlhttp.open("GET", "selectId.php?restNo=" + restNo, true);
-            // xmlhttp.send();
-            console.log(restNo);
-
-            // if (str.length == 0) {
-            //     document.getElementById("txtHint").innerHTML = "";
-            //     return;
-            // } else {
-                
-            // }
         }
     </script>
 </body>
