@@ -43,7 +43,6 @@
                 case "食物":
                     echo "餐廳ID: ";
                     $sql = "select restaurantID from restaurant order by restaurantID ASC";
-                    // $sql = "select foodID, restaurantID from food";
                     $result = $conn->query($sql);
                     $rows = $result->num_rows;
                     echo "<select id='rest' name='restNo' onchange='renew()'>";
@@ -55,6 +54,9 @@
                         }
                     echo "</select><br><br>";
                     echo "食物ID: ";
+
+                    // echo $_GET["restNo"];
+                    // echo var_dump($_COOKIE['restNo']);
                     $sql = "select foodID from food where restaurantID = $rest order by foodID ASC";
                     $result = $conn->query($sql);
                     $rows = $result->num_rows;
@@ -62,7 +64,7 @@
                         for($j=0; $j<$rows; $j++){
                             $row = $result->fetch_row();
                             foreach($row as $food){
-                                echo "<option value='$rest'>". $food. "</option>";
+                                echo "<option value='$food'>". $food. "</option>";
                             }
                         }
                     echo "</select><br><br>";
@@ -95,6 +97,35 @@
     </div>
     <hr>
 
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+    <script>
+        var value = localStorage.getItem(key);
+
+        jQuery.post("selectId.php", {restNo: rest}, function(data)
+        {
+        alert("Do something with example.php response");
+        })
+        // $(document).ready(function(){
+        //     $("#rest").change(function(){
+        //         alert("Value: " + $("#rest").val());
+        //     });
+        // });
+        // function renew(){
+        //     var rest = document.getElementById("rest");
+        //     rest = rest.value;
+        //     document.(rest);
+        //     // document.cookie = 'restNo=' + rest;
+        //     // sessionStorage.setItem('restNo', rest);
+        //     console.log(rest);
+        // }
+        // function renew(){
+        //     var rest = document.getElementById("rest");
+        //     rest = rest.value;
+        //     document.cookie = 'restNo=' + rest;
+        //     // sessionStorage.setItem('restNo', rest);
+        //     console.log(rest);
+        // }
+    </script>
 </body>
 </html>
 

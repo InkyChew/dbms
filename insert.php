@@ -96,7 +96,17 @@
                 break;
             case "購買紀錄":
                 for ($i = 0; $i < count($ary); $i++) {
-                    if($i ==3){
+                    if($i == 0){
+                        $sql = "select MAX(orderID) from orderhistory";
+                        $result = $conn->query($sql);
+                        $rows = $result->fetch_row();
+                        $rows = $rows[0] + 1;
+                        echo "orderId:" . $rows . "<br><br>";
+                    }else if($i == 1){
+                        $sql = "select memberID from member order by memberID ASC";
+                    }else if($i == 2){
+                        $sql = "select deliveryStaffID from deliverystaff order by deliveryStaffID ASC";
+                    } else if($i ==3){
                         $field = $ary[$i];
                         echo "<tr> <td>$field:</td> <td><input type='date' name='insertAry[]'></td> </tr>";
                     } else if($i == 4){
@@ -113,9 +123,20 @@
                                 </div>
                             </div>
                         </td></tr>";
-                    } else{
+                    }
+                    if($i == 1 || $i == 2){
                         $field = $ary[$i];
-                        echo "<tr> <td>$field:</td> <td><input type='text' name='insertAry[]' size='30'></td> </tr>";
+                        echo $field . ":";
+                        $result = $conn->query($sql);
+                        $rows = $result->num_rows;
+                        echo "<select name='no'>";
+                            for($j=0; $j<$rows; $j++){
+                                $row = $result->fetch_row();
+                                foreach($row as $data){
+                                    echo "<option value='$data'>". $data. "</option>";
+                                }
+                            }
+                        echo "</select><br><br>";
                     }
                 }
                 break;
