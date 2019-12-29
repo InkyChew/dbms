@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
--- 主機: 127.0.0.1
+-- 主機： 127.0.0.1
 -- 產生時間： 
--- 伺服器版本: 10.1.29-MariaDB
--- PHP 版本： 7.2.0
+-- 伺服器版本： 10.4.8-MariaDB
+-- PHP 版本： 7.3.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 -- 資料表結構 `deliverystaff`
 --
 
+DROP TABLE IF EXISTS `deliverystaff`;
 CREATE TABLE `deliverystaff` (
   `deliveryStaffID` int(11) NOT NULL,
   `name` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
@@ -35,7 +36,7 @@ CREATE TABLE `deliverystaff` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 資料表的匯出資料 `deliverystaff`
+-- 傾印資料表的資料 `deliverystaff`
 --
 
 INSERT INTO `deliverystaff` (`deliveryStaffID`, `name`, `tel`) VALUES
@@ -50,6 +51,7 @@ INSERT INTO `deliverystaff` (`deliveryStaffID`, `name`, `tel`) VALUES
 -- 資料表結構 `food`
 --
 
+DROP TABLE IF EXISTS `food`;
 CREATE TABLE `food` (
   `foodID` int(11) NOT NULL,
   `name` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -60,7 +62,7 @@ CREATE TABLE `food` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 資料表的匯出資料 `food`
+-- 傾印資料表的資料 `food`
 --
 
 INSERT INTO `food` (`foodID`, `name`, `restaurantID`, `price`, `imageURL`, `description`) VALUES
@@ -81,6 +83,7 @@ INSERT INTO `food` (`foodID`, `name`, `restaurantID`, `price`, `imageURL`, `desc
 -- 資料表結構 `member`
 --
 
+DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
   `memberID` int(11) NOT NULL,
   `account` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -92,7 +95,7 @@ CREATE TABLE `member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 資料表的匯出資料 `member`
+-- 傾印資料表的資料 `member`
 --
 
 INSERT INTO `member` (`memberID`, `account`, `password`, `name`, `gender`, `birthday`, `email`) VALUES
@@ -113,6 +116,7 @@ INSERT INTO `member` (`memberID`, `account`, `password`, `name`, `gender`, `birt
 -- 資料表結構 `orderdetail`
 --
 
+DROP TABLE IF EXISTS `orderdetail`;
 CREATE TABLE `orderdetail` (
   `orderID` int(11) NOT NULL,
   `restaurantID` int(11) NOT NULL,
@@ -121,7 +125,7 @@ CREATE TABLE `orderdetail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 資料表的匯出資料 `orderdetail`
+-- 傾印資料表的資料 `orderdetail`
 --
 
 INSERT INTO `orderdetail` (`orderID`, `restaurantID`, `foodID`, `foodCount`) VALUES
@@ -150,6 +154,7 @@ INSERT INTO `orderdetail` (`orderID`, `restaurantID`, `foodID`, `foodCount`) VAL
 -- 資料表結構 `orderhistory`
 --
 
+DROP TABLE IF EXISTS `orderhistory`;
 CREATE TABLE `orderhistory` (
   `orderID` int(11) NOT NULL,
   `memberID` int(11) NOT NULL,
@@ -159,7 +164,7 @@ CREATE TABLE `orderhistory` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 資料表的匯出資料 `orderhistory`
+-- 傾印資料表的資料 `orderhistory`
 --
 
 INSERT INTO `orderhistory` (`orderID`, `memberID`, `deliveryStaffID`, `creationDatetime`, `arrived`) VALUES
@@ -180,6 +185,7 @@ INSERT INTO `orderhistory` (`orderID`, `memberID`, `deliveryStaffID`, `creationD
 -- 資料表結構 `restaurant`
 --
 
+DROP TABLE IF EXISTS `restaurant`;
 CREATE TABLE `restaurant` (
   `restaurantID` int(11) NOT NULL,
   `name` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
@@ -188,7 +194,7 @@ CREATE TABLE `restaurant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- 資料表的匯出資料 `restaurant`
+-- 傾印資料表的資料 `restaurant`
 --
 
 INSERT INTO `restaurant` (`restaurantID`, `name`, `tel`, `address`) VALUES
@@ -203,6 +209,7 @@ INSERT INTO `restaurant` (`restaurantID`, `name`, `tel`, `address`) VALUES
 -- 替換檢視表以便查看 `restaurantreportview`
 -- (請參考以下實際畫面)
 --
+DROP VIEW IF EXISTS `restaurantreportview`;
 CREATE TABLE `restaurantreportview` (
 `餐廳` varchar(10)
 ,`餐點` varchar(20)
@@ -217,10 +224,10 @@ CREATE TABLE `restaurantreportview` (
 --
 DROP TABLE IF EXISTS `restaurantreportview`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `restaurantreportview`  AS  select `r`.`name` AS `餐廳`,`f`.`name` AS `餐點`,sum(`o`.`foodCount`) AS `被購買數量`,sum((`f`.`price` * `o`.`foodCount`)) AS `銷售總額` from ((`orderdetail` `o` join `restaurant` `r`) join `food` `f`) where ((`o`.`restaurantID` = `r`.`restaurantID`) and (`o`.`foodID` = `f`.`foodID`) and (`r`.`restaurantID` = `f`.`restaurantID`)) group by `f`.`name` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `restaurantreportview`  AS  select `r`.`name` AS `餐廳`,`f`.`name` AS `餐點`,sum(`o`.`foodCount`) AS `被購買數量`,sum(`f`.`price` * `o`.`foodCount`) AS `銷售總額` from ((`orderdetail` `o` join `restaurant` `r`) join `food` `f`) where `o`.`restaurantID` = `r`.`restaurantID` and `o`.`foodID` = `f`.`foodID` and `r`.`restaurantID` = `f`.`restaurantID` group by `f`.`name` ;
 
 --
--- 已匯出資料表的索引
+-- 已傾印資料表的索引
 --
 
 --
@@ -266,29 +273,29 @@ ALTER TABLE `restaurant`
   ADD PRIMARY KEY (`restaurantID`);
 
 --
--- 已匯出資料表的限制(Constraint)
+-- 已傾印資料表的限制式
 --
 
 --
--- 資料表的 Constraints `food`
+-- 資料表的限制式 `food`
 --
 ALTER TABLE `food`
   ADD CONSTRAINT `food_ibfk_1` FOREIGN KEY (`restaurantID`) REFERENCES `restaurant` (`restaurantID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- 資料表的 Constraints `orderdetail`
+-- 資料表的限制式 `orderdetail`
 --
 ALTER TABLE `orderdetail`
-  ADD CONSTRAINT `orderdetail_ibfk_1` FOREIGN KEY (`foodID`) REFERENCES `food` (`foodID`),
-  ADD CONSTRAINT `orderdetail_ibfk_2` FOREIGN KEY (`restaurantID`) REFERENCES `food` (`restaurantID`),
-  ADD CONSTRAINT `orderdetail_ibfk_3` FOREIGN KEY (`orderID`) REFERENCES `orderhistory` (`orderID`);
+  ADD CONSTRAINT `orderdetail_ibfk_1` FOREIGN KEY (`foodID`) REFERENCES `food` (`foodID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orderdetail_ibfk_2` FOREIGN KEY (`restaurantID`) REFERENCES `food` (`restaurantID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orderdetail_ibfk_3` FOREIGN KEY (`orderID`) REFERENCES `orderhistory` (`orderID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- 資料表的 Constraints `orderhistory`
+-- 資料表的限制式 `orderhistory`
 --
 ALTER TABLE `orderhistory`
-  ADD CONSTRAINT `orderhistory_ibfk_1` FOREIGN KEY (`deliveryStaffID`) REFERENCES `deliverystaff` (`deliveryStaffID`),
-  ADD CONSTRAINT `orderhistory_ibfk_2` FOREIGN KEY (`memberID`) REFERENCES `member` (`memberID`);
+  ADD CONSTRAINT `orderhistory_ibfk_1` FOREIGN KEY (`deliveryStaffID`) REFERENCES `deliverystaff` (`deliveryStaffID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orderhistory_ibfk_2` FOREIGN KEY (`memberID`) REFERENCES `member` (`memberID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
