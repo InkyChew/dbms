@@ -176,6 +176,7 @@
     }else{ // 失敗
         echo "<br><br>";
         echo "<font color='red'>！資料".$mode."失敗！</font>";
+        echo "<font class='alert alert-danger'>". $conn->error . "</font>";
         echo "<br><br>";
         echo "<button type='submit' name='btn' value=$mode>回" . $tab . $mode . "</button>&nbsp;<button type='submit' name='btn' value=$tab>回" . $tab . "管理</button>";
     }

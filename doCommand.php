@@ -171,17 +171,11 @@
         }
     }
 
-    // try{
-    //     if ($conn->query($sql)) // 成功
-    //         echo "<font class='alert alert-success'>！資料" . $_SESSION['mode'] . "成功！</font>";
-    // }catch(Exception $e){
-    //     echo "<font class='alert alert-danger'>！資料" . $mode . "失敗！</font>";  
-    //     echo $e->getMessage();
-    // }
     if ($conn->query($sql)){ // 成功
         echo "<font class='alert alert-success'>！資料" . $_SESSION['mode'] . "成功！</font>";
     }else{ // 失敗
-        echo "<font class='alert alert-danger'>！資料" . $mode . "失敗！</font>";            
+        echo "<font class='alert alert-danger'>！資料" . $mode . "失敗！</font>";
+        echo "<font class='alert alert-danger'>". $conn->error . "</font>";
     }
     echo "<br><br><br><hr><br>";        
 
