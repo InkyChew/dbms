@@ -19,7 +19,7 @@
     $tab = $_SESSION['tab'];
     $mode = $_SESSION['mode'];
     $title = $tab . "管理-" . $mode;
-    echo "<h1>$title</h1>";
+    echo "<h1 align=\"center\">$title</h1>";
     
 ?>
     <hr>

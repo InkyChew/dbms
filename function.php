@@ -17,7 +17,7 @@
 <div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
 <?php    
     $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
-    echo "<h1>$title</h1>";    
+    echo "<h1 align=\"center\">$title</h1>";    
 ?>
 <hr>
 <form action="controller.php" method="post">
@@ -34,8 +34,11 @@
         $restNo = $_SESSION['restNo'];
     }
 
-    $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
-
+    $conn = new mysqli("localhost", "root", "", "b10623019hw1");
+    if($conn->connect_error){
+        die("連接資料庫失敗" . $conn->connect_error);
+    }
+    
     switch ($tab) {
         case "會員":
             $ary = array("memberID", "account", "password","name", "gender", "birthday", "email");
@@ -127,8 +130,6 @@
 ?>
 
 </form><br>
-
-
 <br><hr>
 
 </body>

@@ -24,7 +24,10 @@
         <?php  
             $tab = $_SESSION['tab'];
 
-            $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
+            $conn = new mysqli("localhost", "root", "", "b10623019hw1");
+            if($conn->connect_error){
+                die("連接資料庫失敗" . $conn->connect_error);
+            }
             $conn->query("SET NAMES utf8");
 
             switch($tab) {
@@ -93,7 +96,6 @@
             }
             
         ?>
-        <button type="reset">清除</button>
         <button type="submit" name="btn" value=<?php echo $_SESSION['tab'];?>>
             <?php echo '回' . $_SESSION['tab'] . '管理';?>
         </button>

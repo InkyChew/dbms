@@ -22,13 +22,16 @@
     <div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
     <?php    
         $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
-        echo "<h1>$title</h1>";    
+        echo "<h1 align=\"center\">$title</h1>";    
     ?>
     <hr>
 <form action="controller.php" method="post">
     
     <?php
-        $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
+        $conn = new mysqli("localhost", "root", "", "b10623019hw1");
+        if($conn->connect_error){
+            die("連接資料庫失敗" . $conn->connect_error);
+        }
         $conn->query("SET NAMES utf8");
 
         $tab = $_SESSION['tab'];

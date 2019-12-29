@@ -15,21 +15,26 @@
         background-position: center;
         background-size: cover;
     }
+    .btn-group{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
     </style>
 </head>
 <body>
     <div style="text-align:center;"><h1>YunTech Eat</h1></div>
-    <div style="width:100%; text-align:center">
-    <div class="btn-group" role="group" aria-label="Basic example">
-        <form action="controller.php" method="post">
-        <br><br><br><br><br><br><br><button type="submit" name="btn" value="會員" class="btn-secondary btn-lg btn-block">會員管理</button><br>
+    
+    <form action="controller.php" method="post">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="submit" name="btn" value="會員" class="btn btn-secondary btn-lg btn-block">會員管理</button><br>
             <button type="submit" name="btn" value="外送員" class="btn btn-secondary btn-lg btn-block">外送員管理</button><br>
             <button type="submit" name="btn" value="餐廳" class="btn btn-secondary btn-lg btn-block">餐廳管理</button><br>
             <button type="submit" name="btn" value="食物" class="btn btn-secondary btn-lg btn-block">食物管理</button><br>
             <button type="submit" name="btn" value="購買紀錄" class="btn btn-secondary btn-lg btn-block">購買紀錄管理</button>
-        </form>
-    </div>
-    </div>
+        </div>
+    </form>
 
 </body>
 </html>
