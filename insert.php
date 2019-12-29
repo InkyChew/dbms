@@ -58,21 +58,20 @@
                                 $rows = $result->fetch_row();
                                 $rows = $rows[0] + 1;
                                 echo "memberID: <input name='insertAry[]' readonly value=". $rows.">";
-                                // echo "memberID: " . $rows . "<br><br>";
                                 break;
                             case "外送員":
                                 $sql = "select MAX(deliveryStaffID) from deliverystaff";
                                 $result = $conn->query($sql);
                                 $rows = $result->fetch_row();
                                 $rows = $rows[0] + 1;
-                                echo "deliveryStaffID: " . $rows . "<br><br>";
+                                echo "deliveryStaffID: <input name='insertAry[]' readonly value=". $rows.">";
                                 break;
                             case "餐廳":
                                 $sql = "select MAX(restaurantID) from restaurant";
                                 $result = $conn->query($sql);
                                 $rows = $result->fetch_row();
                                 $rows = $rows[0] + 1;
-                                echo "restaurantID: " . $rows . "<br><br>";
+                                echo "restaurantID: <input name='insertAry[]' readonly value=". $rows.">";
                                 break;
                         } 
                     }else if($i ==4 && $tab == "會員"){
@@ -106,8 +105,7 @@
                         $result = $conn->query($sql);
                         $rows = $result->fetch_row();
                         $rows = $rows[0] + 1;
-                        // echo "foodID: <input type='text' name='insertAry[]' disabled>". $rows;
-                        echo "<label name='insertAry[]'>foodID: " . $rows . "</label><br><br>";
+                        echo "foodID: <input name='insertAry[]' readonly value=". $rows.">";
                     }else if($i == 1){
                         $field = $ary[$i];
                         $sql = "select restaurantID from restaurant";
@@ -141,7 +139,7 @@
                         $result = $conn->query($sql);
                         $rows = $result->fetch_row();
                         $rows = $rows[0] + 1;
-                        echo "orderId: " . $rows . "<br><br>";
+                        echo "orderID: <input name='insertAry[]' readonly value=". $rows.">";
                     }else if($i == 1){
                         $sql = "select memberID from member order by memberID ASC";
                     }else if($i == 2){
