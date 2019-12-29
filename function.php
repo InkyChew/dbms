@@ -89,10 +89,15 @@
             foreach ($row as $i => $data){
                 $field = $ary[$i];
                 if ($i != 0){
-                    if ($mode != "修改")
+                    if ($mode != "修改"){
                         echo "<tr> <td>$field:</td> <td>$data</td> </tr>";
-                    else
-                        echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";                   
+                    }else{
+                        if($i ==5){
+                            echo "<tr> <td>$field:</td> <td><input type='date' name='update[]' value=$data ></td> </tr>";
+                        }else{
+                            echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";
+                        }  
+                   }
                 }                   
             }
             echo "</table><br>";
