@@ -92,7 +92,64 @@
                     if ($mode != "修改"){
                         echo "<tr> <td>$field:</td> <td>$data</td> </tr>";
                     }else{
-                        if($i ==5 && $tab == "會員"){
+                        if($i ==4 && $tab == "會員"){
+                            if($data == 0){
+                                echo "<tr> <td>$field:</td> <td>
+                                <div class='form-group row'>
+                                    <div class='form-check form-check-inline'>
+                                        <input class='form-check-input' type='radio' name='update[]' id='inlineRadio1' value='1'>
+                                        <label class='form-check-label' for='inlineRadio1'>男</label>
+                                    </div>
+                                    <div class='form-check form-check-inline'>
+                                        <input class='form-check-input' type='radio' name='update[]' id='inlineRadio2' value='0' checked>
+                                        <label class='form-check-label' for='inlineRadio2'>女</label>
+                                    </div>
+                                </div>
+                                </td></tr>";
+                            }else{
+                                echo "<tr> <td>$field:</td> <td>
+                                <div class='form-group row'>
+                                    <div class='form-check form-check-inline'>
+                                        <input class='form-check-input' type='radio' name='update[]' id='inlineRadio1' value='1' checked>
+                                        <label class='form-check-label' for='inlineRadio1'>男</label>
+                                    </div>
+                                    <div class='form-check form-check-inline'>
+                                        <input class='form-check-input' type='radio' name='update[]' id='inlineRadio2' value='0'>
+                                        <label class='form-check-label' for='inlineRadio2'>女</label>
+                                    </div>
+                                </div>
+                                </td></tr>";
+                            }
+                        }else if($i ==4 && $tab == "購買紀錄"){
+                            if($data == 0){
+                                echo "<tr> <td>$field:</td> <td>
+                                <div class='form-group row'>
+                                    <div class='form-check form-check-inline'>
+                                        <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio1' value='1'>
+                                       <label class='form-check-label' for='inlineRadio1'>是</label>
+                                    </div>
+                                    <div class='form-check form-check-inline'>
+                                        <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio2' value='0' checked>
+                                        <label class='form-check-label' for='inlineRadio2'>否</label>
+                                    </div>
+                                </div>
+                                </td></tr>";
+                            }else{
+                                echo "<tr> <td>$field:</td> <td>
+                                <div class='form-group row'>
+                                    <div class='form-check form-check-inline'>
+                                        <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio1' value='1' checked>
+                                       <label class='form-check-label' for='inlineRadio1'>是</label>
+                                    </div>
+                                    <div class='form-check form-check-inline'>
+                                        <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio2' value='0'>
+                                        <label class='form-check-label' for='inlineRadio2'>否</label>
+                                    </div>
+                                </div>
+                                </td></tr>";
+                            }
+
+                        }else if($i ==5 && $tab == "會員"){
                             echo "<tr> <td>$field:</td> <td><input type='date' name='update[]' value=$data ></td> </tr>";
                         }else{
                             echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";

@@ -74,7 +74,22 @@
                                 echo "restaurantID: " . $rows . "<br><br>";
                                 break;
                         } 
-                    }else if($i ==5){
+                    }else if($i ==4 && $tab == "會員"){
+                        $field = $ary[$i];
+                        echo "<tr> <td>$field:</td> <td>
+                            <div class='form-group row'>
+                                <div class='form-check form-check-inline'>
+                                    <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio1' value='1'>
+                                    <label class='form-check-label' for='inlineRadio1'>男</label>
+                                </div>
+                                <div class='form-check form-check-inline'>
+                                    <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio2' value='0'>
+                                    <label class='form-check-label' for='inlineRadio2'>女</label>
+                                </div>
+                            </div>
+                        </td></tr>";
+                    
+                    }else if($i ==5 && $tab == "會員"){
                         $field = $ary[$i];
                         echo "<tr> <td>$field:</td> <td><input type='date' name='insertAry[]'></td> </tr>";
                     }else{
