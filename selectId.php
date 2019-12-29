@@ -103,7 +103,7 @@
 
         jQuery.post("selectId.php", {restNo: rest}, function(data)
         {
-        alert("Do something with example.php response");
+            alert("Do something with example.php response");
         })
         // $(document).ready(function(){
         //     $("#rest").change(function(){
