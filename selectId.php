@@ -45,19 +45,20 @@
                     $sql = "select restaurantID from restaurant order by restaurantID ASC";
                     $result = $conn->query($sql);
                     $rows = $result->num_rows;
-                    echo "<select id='rest' name='restNo' onchange='renew()'>";
+                    echo "<select id='rest' name='restNo' onchange='renew(this.value)'>";
                         for($j=0; $j<$rows; $j++){
                             $row = $result->fetch_row();
                             foreach($row as $rest){
-                                echo "<option value='$rest'>". $rest. "</option>";
+                                $selected = "";
+                                if($rest === $_GET["restNo"] ){
+                                    $selected = "selected";
+                                }
+                                echo "<option value='$rest' $selected>". $rest. "</option>";
                             }
                         }
                     echo "</select><br><br>";
                     echo "食物ID: ";
-
-                    // echo $_GET["restNo"];
-                    // echo var_dump($_COOKIE['restNo']);
-                    $sql = "select foodID from food where restaurantID = $rest order by foodID ASC";
+                    $sql = "select foodID from food where restaurantID = $_GET[restNo] order by foodID ASC";
                     $result = $conn->query($sql);
                     $rows = $result->num_rows;
                     echo "<select id='food' name='foodNo'>";
@@ -99,32 +100,25 @@
 
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
     <script>
-        var value = localStorage.getItem(key);
+        function renew(restNo){
+            window.location.href = "selectId.php?restNo="+ restNo;
+            // var xmlhttp = new XMLHttpRequest();
+            // xmlhttp.onreadystatechange = function() {
+            //     if (this.readyState == 4 && this.status == 200) {
+            //         document.getElementById("txtHint").innerHTML = this.responseText;
+            //     }
+            // };
+            // xmlhttp.open("GET", "selectId.php?restNo=" + restNo, true);
+            // xmlhttp.send();
+            console.log(restNo);
 
-        jQuery.post("selectId.php", {restNo: rest}, function(data)
-        {
-            alert("Do something with example.php response");
-        })
-        // $(document).ready(function(){
-        //     $("#rest").change(function(){
-        //         alert("Value: " + $("#rest").val());
-        //     });
-        // });
-        // function renew(){
-        //     var rest = document.getElementById("rest");
-        //     rest = rest.value;
-        //     document.(rest);
-        //     // document.cookie = 'restNo=' + rest;
-        //     // sessionStorage.setItem('restNo', rest);
-        //     console.log(rest);
-        // }
-        // function renew(){
-        //     var rest = document.getElementById("rest");
-        //     rest = rest.value;
-        //     document.cookie = 'restNo=' + rest;
-        //     // sessionStorage.setItem('restNo', rest);
-        //     console.log(rest);
-        // }
+            // if (str.length == 0) {
+            //     document.getElementById("txtHint").innerHTML = "";
+            //     return;
+            // } else {
+                
+            // }
+        }
     </script>
 </body>
 </html>
