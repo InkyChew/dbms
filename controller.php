@@ -31,7 +31,7 @@
             if (isset($_POST['foodNo']) && isset($_POST['restNo'])) {
                 $_SESSION['foodNo'] = $_POST['foodNo'];
                 $_SESSION['restNo'] = $_POST['restNo'];
-            } else { // 已經進入功能畫面 要 修改 或 刪除資料 or 新增資料
+            } else {
                 $file = "doCommand";
                 if (isset($_POST['update']))
                     $_SESSION['update'] = $_POST['update'];

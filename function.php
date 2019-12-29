@@ -25,11 +25,16 @@
 <form action="controller.php" method="post">
     
 <?php
-    $no = $_SESSION['no'];
-    $foodNo = $_SESSION['foodNo'];
-    $restNo = $_SESSION['restNo'];
     $tab = $_SESSION['tab'];
     $mode = $_SESSION['mode'];
+
+    if(isset($_SESSION['no'])){
+        $no = $_SESSION['no'];
+    }
+    if(isset($_SESSION['foodNo']) && isset($_SESSION['restNo'])){
+        $foodNo = $_SESSION['foodNo'];
+        $restNo = $_SESSION['restNo'];
+    }
 
     $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
 
@@ -83,7 +88,7 @@
             echo "<br><br>";
             echo "<font color='red'>！資料不存在！</font>";
             echo "<br><br>";
-            echo "<button type='submit' name='btn' value=$mode>回" . $mode . "主畫面</button>&nbsp;<button type='submit' name='btn'>主畫面</button>";
+            echo "<button type='submit' name='btn' value=$mode>回" . $tab . $mode . "</button>&nbsp;<button type='submit' name='btn' value=$tab>回" . $tab . "管理</button>";
         }else{
             // echo "有資料";
             echo "<table>";
@@ -116,7 +121,7 @@
         echo "<br><br>";
         echo "<font color='red'>！資料".$mode."失敗！</font>";
         echo "<br><br>";
-        echo "<button type='submit' name='btn' value=$mode>回" . $mode . "主畫面</button>&nbsp;<button type='submit' name='btn'>主畫面</button>";
+        echo "<button type='submit' name='btn' value=$mode>回" . $tab . $mode . "</button>&nbsp;<button type='submit' name='btn' value=$tab>回" . $tab . "管理</button>";
     }
 
     $conn->close();

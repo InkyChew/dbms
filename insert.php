@@ -28,6 +28,9 @@
 <form action="controller.php" method="post">
     
     <?php
+        $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
+        $conn->query("SET NAMES utf8");
+
         $tab = $_SESSION['tab'];
         switch ($tab) {
             case "會員":
@@ -57,13 +60,26 @@
                 break;
             case "食物":
                 for ($i = 0; $i < count($ary); $i++) {
-                    if($i == 4){
+                    if($i == 1){
+                        $field = $ary[$i];
+                        $sql = "select restaurantID from restaurant";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_row();
+                        print_r($result);
+                        print_r($row);
+                        echo "<tr> <td>$field:</td>";
+                        echo "<td><select>";
+                            foreach($row as $data){
+                                echo "<option value='$i'>". $data. "</option>";
+                            }
+                        echo "</select></td> </tr>";
+                    }else if($i == 4){
                         $field = $ary[$i];
                         echo "<tr> <td>$field:</td> <td><input type='text' name='insertAry[]' size='30'></td> </tr>";
                     } else if($i == 5){
                         $field = $ary[$i];
                         echo "<tr> <td>$field:</td> <td><textarea type='text' name='insertAry[]' style='margin: 0px; height: 82px; width: 240px;'>Write some description...</textarea></td></tr>";
-                    } else{
+                    }else{
                         $field = $ary[$i];
                         echo "<tr> <td>$field:</td> <td><input type='text' name='insertAry[]' size='30'></td> </tr>";
                     }

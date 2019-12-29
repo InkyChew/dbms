@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title><?php session_start(); echo $_SESSION['tab'] . "管理-" . $_SESSION['mode'];?></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style type=text/css>
         body{
             background-image:url( https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-pure-hand-painted-literary-minimalist-border-background-hand-drawingwatercolorplantflowersliteraryweddinggreeting-cardbackgroundmaterialframesimple-image_87164.jpg );
@@ -27,7 +31,14 @@
     $conn->query("SET NAMES utf8");
     $tab = $_SESSION['tab'];
     $mode = $_SESSION['mode'];
-    $no = $_SESSION['no'];
+
+    if(isset($_SESSION['no'])){
+        $no = $_SESSION['no'];
+    }
+    if(isset($_SESSION['foodNo']) && isset($_SESSION['restNo'])){
+        $foodNo = $_SESSION['foodNo'];
+        $restNo = $_SESSION['restNo'];
+    }
 
     if ($tab == "會員") {
         switch ($mode){
@@ -87,7 +98,9 @@
                 $tel = $ary[1];
                 $address = $ary[2];
                 // print_r($ary);
-                $sql = "update restaurant set name = '$name', tel = '$tel', name = '$name', address = '$address' where restaurantID = $no";                 
+                $sql = "update restaurant
+                        set name = '$name', tel = '$tel', name = '$name', address = '$address'
+                        where restaurantID = $no";                 
                 break;
             case "刪除":
                 $sql = "delete from restaurant where restaurantID = $no";
@@ -108,13 +121,16 @@
             case "修改":
                 $ary = $_SESSION['update'];
                 $name = $ary[0];
-                $tel = $ary[1];
-                $address = $ary[2];
+                $price = $ary[1];
+                $imageURL = $ary[2];
+                $description = $ary[3];
                 // print_r($ary);
-                $sql = "update restaurant set name = '$name', tel = '$tel', name = '$name', address = '$address' where restaurantID = $no";                 
+                $sql = "update food
+                        set name = '$name', price = '$price', imageURL = '$imageURL', description = '$description'
+                        where foodID = $foodNo and restaurantID = $restNo";                 
                 break;
             case "刪除":
-                $sql = "delete from restaurant where restaurantID = $no";
+                $sql = "delete from food where foodID = $foodNo and restaurantID = $restNo";
                 break;
             case "新增":  
                 $ary = $_SESSION['insertAry'];
@@ -123,7 +139,7 @@
                     if ($i != 0)
                         $temp = $temp . ", '" . $data . "'";
                 }
-                $sql = "insert into restaurant values($temp)";
+                $sql = "insert into food values($temp)";
                 // echo $sql;
                 break;
         }
@@ -131,11 +147,14 @@
         switch ($mode){
             case "修改":
                 $ary = $_SESSION['update'];
-                $name = $ary[0];
+                $deliveryName = $ary[0];
                 $tel = $ary[1];
-                $address = $ary[2];
+                $arrived = $ary[2];
+
                 // print_r($ary);
-                $sql = "update restaurant set name = '$name', tel = '$tel', name = '$name', address = '$address' where restaurantID = $no";                 
+                $sql = "update orderhistory
+                        set name = '$name', tel = '$tel', name = '$name', address = '$address'
+                        where orderID = $no";                 
                 break;
             case "刪除":
                 $sql = "delete from orderhistory where orderID = $no";
@@ -147,16 +166,16 @@
                     if ($i != 0)
                         $temp = $temp . ", '" . $data . "'";
                 }
-                $sql = "insert into restaurant values($temp)";
+                $sql = "insert into orderhistory values($temp)";
                 // echo $sql;
                 break;
         }
     }
 
     if ($conn->query($sql)){ // 成功
-        echo "<font>！資料" . $_SESSION['mode'] . "成功！</font>";
+        echo "<font class='alert alert-success'>！資料" . $_SESSION['mode'] . "成功！</font>";
     }else{ // 失敗
-        echo "<font color='red'>！資料" . $mode . "失敗！</font>";            
+        echo "<font class='alert alert-danger'>！資料" . $mode . "失敗！</font>";            
     }
     echo "<br><br>";        
 

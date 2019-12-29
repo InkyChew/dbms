@@ -36,7 +36,6 @@
                     break;
             }
         ?>
-        <!-- <button type="submit" name="btn" value="goSQL"><?php echo $_SESSION['mode']?></button> -->
         <button type="reset">清除</button>
         <button type="submit" name="btn" value=<?php echo $_SESSION['tab'];?>>
             <?php echo '回' . $_SESSION['tab'] . '管理';?>
