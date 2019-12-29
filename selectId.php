@@ -24,17 +24,75 @@
     <form action="controller.php" method="post">
         <?php  
             $tab = $_SESSION['tab'];
+
+            $conn = new mysqli("localhost", "root", "", "b10623019hw1") or die("連接資料庫失敗");
+            $conn->query("SET NAMES utf8");
+
             switch($tab) {
-                case '食物':
-                    echo "foodID: <input type='int' name='foodNo'><br><br>";
-                    echo "restaurantID: <input type='int' name='restNo'><br><br>";
+                case "會員":
+                    $sql = "select memberID from member order by memberID ASC";
+                    break;
+                case "外送員":
+                    $sql = "select deliveryStaffID from deliverystaff order by deliveryStaffID ASC";
+                    break;
+                case "餐廳":
+                    $sql = "select restaurantID from restaurant order by restaurantID ASC";
+                    break;
+                case "食物":
+                    echo "餐廳ID: ";
+                    $sql = "select restaurantID from restaurant order by restaurantID ASC";
+                    // $sql = "select foodID, restaurantID from food";
+                    $result = $conn->query($sql);
+                    $rows = $result->num_rows;
+                    echo "<select name='restNo'>";
+                        for($j=0; $j<$rows; $j++){
+                            $row = $result->fetch_row();
+                            foreach($row as $rest){
+                                echo "<option value='$rest'>". $rest. "</option>";
+                            }
+                        }
+                    echo "</select><br><br>";
+                    echo "食物ID: ";
+                    $sql = "select foodID from food where restaurantID = $rest order by foodID ASC";
+                    $result = $conn->query($sql);
+                    $rows = $result->num_rows;
+                    echo "<select name='foodNo'>";
+                        for($j=0; $j<$rows; $j++){
+                            $row = $result->fetch_row();
+                            foreach($row as $rest){
+                                echo "<option value='$rest'>". $rest. "</option>";
+                            }
+                        }
+                    echo "</select><br><br>";
                     echo "<button type='submit' name='btn' value='goFoodSQL'>". $_SESSION['mode']. "</button>";
                     break;
-                default:
-                    echo $tab . "ID: <input type='int' name='no'><br><br>";
-                    echo "<button type='submit' name='btn' value='goSQL'>". $_SESSION['mode']. "</button>";
+                case "購買紀錄":
+                    $sql = "select orderID from orderhistory order by orderID ASC";
                     break;
+                default:
+                    
+                    break;
+                // case '食物':
+                //     echo "foodID: <input type='int' name='foodNo'><br><br>";
+                //     echo "restaurantID: <input type='int' name='restNo'><br><br>";
+                //     echo "<button type='submit' name='btn' value='goFoodSQL'>". $_SESSION['mode']. "</button>";
+                //     break;
             }
+            if($tab != "食物"){
+                echo $tab . "ID: ";
+                $result = $conn->query($sql);
+                $rows = $result->num_rows;
+                echo "<select name='no'>";
+                    for($j=0; $j<$rows; $j++){
+                        $row = $result->fetch_row();
+                        foreach($row as $data){
+                            echo "<option value='$data'>". $data. "</option>";
+                        }
+                    }
+                echo "</select><br><br>";
+                echo "<button type='submit' name='btn' value='goSQL'>". $_SESSION['mode']. "</button>";
+            }
+            
         ?>
         <button type="reset">清除</button>
         <button type="submit" name="btn" value=<?php echo $_SESSION['tab'];?>>

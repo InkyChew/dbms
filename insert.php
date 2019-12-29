@@ -64,13 +64,14 @@
                         $field = $ary[$i];
                         $sql = "select restaurantID from restaurant";
                         $result = $conn->query($sql);
-                        $row = $result->fetch_row();
-                        print_r($result);
-                        print_r($row);
+                        $rows = $result->num_rows;
                         echo "<tr> <td>$field:</td>";
-                        echo "<td><select>";
-                            foreach($row as $data){
-                                echo "<option value='$i'>". $data. "</option>";
+                        echo "<td><select name='insertAry[]'>";
+                            for($j=0; $j<$rows; $j++){
+                                $row = $result->fetch_row();
+                                foreach($row as $data){
+                                    echo "<option value='$data'>". $data. "</option>";
+                                }
                             }
                         echo "</select></td> </tr>";
                     }else if($i == 4){
@@ -78,7 +79,7 @@
                         echo "<tr> <td>$field:</td> <td><input type='text' name='insertAry[]' size='30'></td> </tr>";
                     } else if($i == 5){
                         $field = $ary[$i];
-                        echo "<tr> <td>$field:</td> <td><textarea type='text' name='insertAry[]' style='margin: 0px; height: 82px; width: 240px;'>Write some description...</textarea></td></tr>";
+                        echo "<tr> <td>$field:</td> <td><textarea type='text' name='insertAry[]' style='margin: 0px; height: 82px; width: 250px;'></textarea></td></tr>";
                     }else{
                         $field = $ary[$i];
                         echo "<tr> <td>$field:</td> <td><input type='text' name='insertAry[]' size='30'></td> </tr>";

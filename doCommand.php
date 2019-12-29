@@ -134,11 +134,13 @@
                 break;
             case "新增":  
                 $ary = $_SESSION['insertAry'];
-                $temp = $ary[0];
+                // print_r($ary);
+                $temp = $ary[0] . "," . $ary[1];
                 foreach ($ary as $i => $data){
-                    if ($i != 0)
-                        $temp = $temp . ", '" . $data . "'";
+                    if ($i > 1)
+                        $temp = $temp . "," . $data;
                 }
+                print_r($temp);
                 $sql = "insert into food values($temp)";
                 // echo $sql;
                 break;
