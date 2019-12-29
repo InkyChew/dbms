@@ -7,25 +7,18 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <style type=text/css>
-        body{
-            background-image:url( https://www.mokuge.com/uploads/userup/505/1555502307.jpg );
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
-            background-size: cover;
-        }
-    </style>
+    <link rel="stylesheet" href="style2.css">
 </head>
 <body>
-<div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
-<?php    
+<div style="text-align:center;"><h1>&nbsp YunTech Eat </h1></div>
+
+    <form action="controller.php" method="post">
+    <div class="do">
+    <?php    
     $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
     echo "<h1 align=\"center\">$title</h1>";
-?>
+    ?>
     <hr><br><br>
-    <form action="controller.php" method="post">
-
 <?php
     $conn = new mysqli("localhost", "root", "", "b10623019hw1");
     if($conn->connect_error){
@@ -194,13 +187,14 @@
     }else{ // 失敗
         echo "<font class='alert alert-danger'>！資料" . $mode . "失敗！</font>";            
     }
-    echo "<br><br>";        
+    echo "<br><br><br><hr><br>";        
 
     echo "<button type='submit' name='btn' value=$mode>回" . $tab . $mode. "</button>&nbsp;<button type='submit' name='btn' value=$tab>回" . $tab . "管理</button>";
 
     $conn->close();
 ?>
     <br><br>
+</div>
     </form>
     <hr>
 </body>

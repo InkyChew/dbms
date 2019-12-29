@@ -1,0 +1,13 @@
+body{
+    background-image:url( https://img.tukuppt.com/bg_grid/00/11/74/HQ20FR39QQ.jpg!/fh/350 );
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+.btn-group{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

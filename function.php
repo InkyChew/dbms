@@ -3,25 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title><?php session_start(); echo $_SESSION['tab'] . "管理-" . $_SESSION['mode'];?></title>
-    <style type=text/css>
-    body{
-        background-image:url(https://www.mokuge.com/uploads/userup/505/1555502307.jpg);
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-        background-size: cover;
-    }
-    </style>
+    <link rel="stylesheet" href="f_style.css">
 </head>
 <body>
-<div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
+<div style="text-align:center;"><h1>&nbsp YunTech Eat </h1></div>
+
+<form action="controller.php" method="post">
+<div class = "result">
 <?php    
     $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
-    echo "<h1 align=\"center\">$title</h1>";    
+    echo "<h1>$title</h1>";    
 ?>
 <hr>
-<form action="controller.php" method="post">
-    
 <?php
     $tab = $_SESSION['tab'];
     $mode = $_SESSION['mode'];
@@ -96,10 +89,15 @@
             foreach ($row as $i => $data){
                 $field = $ary[$i];
                 if ($i != 0){
-                    if ($mode != "修改")
+                    if ($mode != "修改"){
                         echo "<tr> <td>$field:</td> <td>$data</td> </tr>";
-                    else
-                        echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";                   
+                    }else{
+                        if($i ==5 && $tab == "會員"){
+                            echo "<tr> <td>$field:</td> <td><input type='date' name='update[]' value=$data ></td> </tr>";
+                        }else{
+                            echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";
+                        }  
+                   }
                 }                   
             }
             echo "</table><br>";
@@ -128,9 +126,9 @@
     $conn->close();
 
 ?>
-
+</div>
 </form><br>
-<br><hr>
+<br>
 
 </body>
 </html>
