@@ -3,25 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title><?php session_start(); echo $_SESSION['tab'] . "管理-" . $_SESSION['mode'];?></title>
-    <style type=text/css>
-    body{
-        background-image:url(https://www.mokuge.com/uploads/userup/505/1555502307.jpg);
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-        background-size: cover;
-    }
-    </style>
+    <link rel="stylesheet" href="f_style.css">
 </head>
 <body>
-<div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
+<div style="text-align:center;"><h1>&nbsp YunTech Eat </h1></div>
+
+<form action="controller.php" method="post">
+<div class = "result">
 <?php    
     $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
-    echo "<h1 align=\"center\">$title</h1>";    
+    echo "<h1>$title</h1>";    
 ?>
 <hr>
-<form action="controller.php" method="post">
-    
 <?php
     $tab = $_SESSION['tab'];
     $mode = $_SESSION['mode'];
@@ -128,9 +121,9 @@
     $conn->close();
 
 ?>
-
+</div>
 </form><br>
-<br><hr>
+<br>
 
 </body>
 </html>

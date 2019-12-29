@@ -7,26 +7,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <title><?php session_start(); echo $_SESSION['tab'] . "管理-" . $_SESSION['mode'];?></title>
-
-    <style type=text/css>
-    body{
-        background-image:url( https://www.mokuge.com/uploads/userup/505/1555502307.jpg );
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-        background-size: cover;
-    }
-    </style>
+    <link rel="stylesheet" href="style2.css">
 </head>
+
 <body>
-    <div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
+    <div style="text-align:center;"><h1>&nbsp YunTech Eat </h1></div>
+
+    <form action="controller.php" method="post">
+    <div class="add">
     <?php    
         $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
-        echo "<h1 align=\"center\">$title</h1>";    
+        echo "<h1>$title</h1>";    
     ?>
     <hr>
-<form action="controller.php" method="post">
-    
     <?php
         $conn = new mysqli("localhost", "root", "", "b10623019hw1");
         if($conn->connect_error){
@@ -122,15 +115,16 @@
         }
 
         echo "</table><br>";
-        
 
     ?>
+    <hr>
     <button type="submit" name="btn" value="goSQL"><?php echo $_SESSION['mode']?></button>
     <button type="reset">清除</button>
     <button type="submit" name="btn" value=<?php echo $_SESSION['tab'];?>>
         <?php echo '回' . $_SESSION['tab'] . '管理';?>
     </button>
-</form><br>
+    </div>
+    </form><br>
 
 
 <br><hr>

@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-<div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
+<div style="text-align:center;"><h1>YunTech Eat </h1></div>
 <?php    
     $title = $_SESSION['tab'] . "管理-" . $_SESSION['mode'];
     echo "<h1 align=\"center\">$title</h1>";    
@@ -101,7 +101,6 @@
         </button>
     </form>
     </div>
-    <hr>
 </body>
 </html>
 
