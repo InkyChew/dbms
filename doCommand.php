@@ -168,7 +168,7 @@
                     if ($i != 0)
                         $temp = $temp . ", '" . $data . "'";
                 }
-                print_r($temp);
+                echo($temp);
                 $sql = "insert into orderhistory values($temp)";
                 // echo $sql;
                 break;

@@ -58,9 +58,12 @@
                         }
                     echo "</select><br><br>";
                     echo "食物ID: ";
-                    $sql = "select foodID from food where restaurantID = $_GET[restNo] order by foodID ASC";
-                    $result = $conn->query($sql);
-                    $rows = $result->num_rows;
+                    if(isset($_GET["restNo"])){
+                        $restNo = $_GET["restNo"];
+                        $sql = "select foodID from food where restaurantID = $restNo order by foodID ASC";
+                        $result = $conn->query($sql);
+                        $rows = $result->num_rows;
+                    }                    
                     echo "<select id='food' name='foodNo'>";
                         for($j=0; $j<$rows; $j++){
                             $row = $result->fetch_row();

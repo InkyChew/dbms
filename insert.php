@@ -57,7 +57,8 @@
                                 $result = $conn->query($sql);
                                 $rows = $result->fetch_row();
                                 $rows = $rows[0] + 1;
-                                echo "memberID: " . $rows . "<br><br>";
+                                echo "memberID: <input name='insertAry[]' readonly value=". $rows.">";
+                                // echo "memberID: " . $rows . "<br><br>";
                                 break;
                             case "外送員":
                                 $sql = "select MAX(deliveryStaffID) from deliverystaff";
@@ -90,7 +91,8 @@
                         $result = $conn->query($sql);
                         $rows = $result->fetch_row();
                         $rows = $rows[0] + 1;
-                        echo "foodID: " . $rows . "<br><br>";
+                        // echo "foodID: <input type='text' name='insertAry[]' disabled>". $rows;
+                        echo "<label name='insertAry[]'>foodID: " . $rows . "</label><br><br>";
                     }else if($i == 1){
                         $field = $ary[$i];
                         $sql = "select restaurantID from restaurant";
@@ -152,7 +154,7 @@
                         echo $field . ":";
                         $result = $conn->query($sql);
                         $rows = $result->num_rows;
-                        echo "<select name='no'>";
+                        echo "<select name='insertAry[]'>";
                             for($j=0; $j<$rows; $j++){
                                 $row = $result->fetch_row();
                                 foreach($row as $data){
