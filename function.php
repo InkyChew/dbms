@@ -173,8 +173,23 @@
                             }
                         }else if($i == 5 && $tab == "會員"){
                             echo "<tr> <td>$field:</td> <td><input type='date' name='update[]' value=$data ></td> </tr>";
-                        }else if($tab == "購買紀錄" && ($i==1 || $i==3)){
-                            echo "<tr> <td>$field:</td> <td><input type='text' readonly value=$data size='30'></td> </tr>";
+                        }else if($tab == "購買紀錄"){
+                            if($i == 2){
+                                echo "<tr> <td>$field:</td> <td>";
+                                $sql = "select deliveryStaffID from deliverystaff order by deliveryStaffID ASC";
+                                $result = $conn->query($sql);
+                                $rows = $result->num_rows;
+                                echo "<select name='no'>";
+                                    for($j=0; $j<$rows; $j++){
+                                        $row = $result->fetch_row();
+                                        foreach($row as $data){
+                                            echo "<option value='$data'>". $data. "</option>";
+                                        }
+                                    }
+                                echo "</select></td> </tr>";
+                            }else if($i==1 || $i==3){
+                                echo "<tr> <td>$field:</td> <td><input type='text' readonly value=$data size='30'></td> </tr>";
+                            }
                         }else{
                             echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";
                         }
