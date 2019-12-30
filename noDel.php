@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-<div style="text-align:left;"><h1>&nbsp YunTech Eat </h1></div>
+<div style="text-align:center;"><h1>&nbsp YunTech Eat </h1></div>
 <?php    
     $tab = $_SESSION['tab'];
     $mode = $_SESSION['mode'];
