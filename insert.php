@@ -194,7 +194,7 @@
 
     ?>
     <hr>
-    <button type="submit" name="btn" value="goSQL"><?php echo $_SESSION['mode']?></button>
+    <button type="submit" id="insert" name="btn" onclick=check()><?php echo $_SESSION['mode']?></button>
     <button type="reset">清除</button>
     <button type="submit" name="btn" value=<?php echo $_SESSION['tab'];?>>
         <?php echo '回' . $_SESSION['tab'] . '管理';?>
@@ -206,6 +206,25 @@
 <br><hr>
 
     <script>
+        const input = document.querySelectorAll('input');
+        input.addEventListener('input', evt => {
+            const value = input.value.trim();
+
+            if (value) {
+                input.dataset.state = 'valid';
+            } else {
+                input.dataset.state = 'invalid';
+            }
+        })
+        function check(){
+            if(input.dataset.state == 'invalid'){
+                alert("input cannot be empty!");                
+                document.getElementById("insert").setAttribute("value", "新增");
+            }else if(input.dataset.state == 'valid'){
+                document.getElementById("insert").setAttribute("value", "goSQL");
+            }
+        }
+
         function renew(restNo){
             window.location.href = "insert.php?restNo="+ restNo;
         }

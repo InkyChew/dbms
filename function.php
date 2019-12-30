@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title><?php session_start(); echo $_SESSION['tab'] . "管理-" . $_SESSION['mode'];?></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="f_style.css">
 </head>
 <body>
@@ -209,24 +213,29 @@
 <br>
 
     <script>
-        const input = document.querySelector('input');
-        input.addEventListener('input', evt => {
-            const value = input.value.trim();
-
-            if (value) {
-                input.dataset.state = 'valid';
-            } else {
-                input.dataset.state = 'invalid';
-            }
-        })
+        const input = document.querySelectorAll('input');
+        var i;
+        // var valid = false;
+        console.log(input.length);
+        console.log(input);
 
         function check(){
-            if(input.dataset.state == 'invalid'){
-                alert("input cannot be empty!");                
-                document.getElementById("update").setAttribute("value", "funPage");
-            }else if(input.dataset.state == 'valid'){
-                document.getElementById("update").setAttribute("value", "goSQL");
+            for (i = 0; i < input.length; i++) {
+                var value = input[i].value;
+                if(value == "" || value == null){
+                    alert("input cannot be empty!");                
+                    document.getElementById("update").setAttribute("value", "funPage");
+                }
             }
+            // if(valid){
+            //     document.getElementById("update").setAttribute("value", "goSQL");
+            // }
+            // if(input.dataset.state == 'invalid'){
+            //     alert("input cannot be empty!");                
+            //     document.getElementById("update").setAttribute("value", "funPage");
+            // }else if(input.dataset.state == 'valid'){
+            //     document.getElementById("update").setAttribute("value", "goSQL");
+            // }
         }
     </script>
 
