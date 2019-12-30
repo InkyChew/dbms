@@ -25,12 +25,13 @@
     <hr>
     <form action="controller.php" method="post">
     <br><br>
-
+<div style="width:100%;text-align:center">
 <?php
     echo "<font>！資料沒有刪除！</font>";
     echo "<br><br>";        
     echo "<button type='submit' name='btn' value=$mode>回" . $tab . "刪除</button>&nbsp;<button type='submit' name='btn' value=$tab>回" . $tab . "管理</button>";
 ?>
+</div>
     <br><br>
     </form>
     <hr>

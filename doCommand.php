@@ -172,10 +172,10 @@
     }
 
     if ($conn->query($sql)){ // 成功
-        echo "<font class='alert alert-success'>！資料" . $_SESSION['mode'] . "成功！</font>";
+        echo "<div class='alert alert-success'>！資料" . $_SESSION['mode'] . "成功！</div>";
     }else{ // 失敗
-        echo "<font class='alert alert-danger'>！資料" . $mode . "失敗！</font>";
-        echo "<font class='alert alert-danger'>". $conn->error . "</font>";
+        echo "<div class='alert alert-danger'>！資料" . $mode . "失敗！</div>";
+        echo "<div class='alert alert-danger'>". $conn->error . "</div>";
     }
     echo "<br><br><br><hr><br>";        
 
