@@ -235,12 +235,6 @@
                 alert("input cannot be empty!");                
                 document.getElementById("update").setAttribute("value", "funPage");
             }
-            // if(input.dataset.state == 'invalid'){
-            //     alert("input cannot be empty!");                
-            //     document.getElementById("update").setAttribute("value", "funPage");
-            // }else if(input.dataset.state == 'valid'){
-            //     document.getElementById("update").setAttribute("value", "goSQL");
-            // }
         }
     </script>
 
