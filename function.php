@@ -173,6 +173,8 @@
                             }
                         }else if($i == 5 && $tab == "會員"){
                             echo "<tr> <td>$field:</td> <td><input type='date' name='update[]' value=$data ></td> </tr>";
+                        }else if($i == 2 && $tab == "食物"){
+                            echo "<tr> <td>$field:</td> <td><input type='number' name='update[]' value=$data></td> </tr>";
                         }else if($tab == "購買紀錄"){
                             if($i == 2){
                                 echo "<tr> <td>$field:</td> <td>";
