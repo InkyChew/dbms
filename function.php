@@ -90,7 +90,21 @@
                 $field = $ary[$i];
                 if ($i != 0){
                     if ($mode != "修改"){
-                        echo "<tr> <td>$field:</td> <td>$data</td> </tr>";
+                        if($i ==4 && $tab == "會員"){
+                            if($data == 0){
+                                echo "<tr> <td>$field:</td> <td>男</td> </tr>";
+                            }else{
+                                echo "<tr> <td>$field:</td> <td>女</td> </tr>";
+                            }
+                        }else if($i ==4 && $tab == "購買紀錄"){
+                            if($data == 0){
+                                echo "<tr> <td>$field:</td> <td>否</td> </tr>";
+                            }else{
+                                echo "<tr> <td>$field:</td> <td>是</td> </tr>";
+                            }
+                        }else{
+                           echo "<tr> <td>$field:</td> <td>$data</td> </tr>"; 
+                        }
                     }else{
                         if($i ==4 && $tab == "會員"){
                             if($data == 0){
