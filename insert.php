@@ -107,8 +107,8 @@
                             $result = $conn->query($sql);
                             $rows = $result->fetch_row();
                             $rows = $rows[0] + 1;
+                            echo "foodID: <input name='insertAry[]' readonly value=". $rows.">";
                         }                    
-                        echo "foodID: <input name='insertAry[]' readonly value=". $rows.">";
                     }else if($i == 1){
                         $field = $ary[$i];
                         $sql = "select restaurantID from restaurant order by restaurantID ASC";
