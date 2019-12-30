@@ -57,10 +57,15 @@
             }                        
             break;
         case "購買紀錄":
-            $ary = array("orderID", "memberName", "deliveryName", "creationDatetime", "arrived");
-            $sql = "select o.orderID, m.name, d.name, o.creationDatetime, o.arrived
-                    from orderhistory as o, member as m, deliverystaff as d
-                    where orderID = $no and o.memberID = m.memberID and o.deliveryStaffID = d.deliveryStaffID";
+            if($mode == "修改"){
+                $ary = array("orderId", "memberId", "deliveryStaffId", "creationDatetime", "arrived");
+                $sql = "select * from orderhistory where orderID = $no";
+            }else{
+                $ary = array("orderID", "memberName", "deliveryName", "creationDatetime", "arrived");
+                $sql = "select o.orderID, m.name, d.name, o.creationDatetime, o.arrived
+                        from orderhistory as o, member as m, deliverystaff as d
+                        where orderID = $no and o.memberID = m.memberID and o.deliveryStaffID = d.deliveryStaffID";
+            }            
             break;
     }
 
@@ -92,7 +97,7 @@
                     if ($mode != "修改"){
                         echo "<tr> <td>$field:</td> <td>$data</td> </tr>";
                     }else{
-                        if($i ==4 && $tab == "會員"){
+                        if($i == 4 && $tab == "會員"){
                             if($data == 0){
                                 echo "<tr> <td>$field:</td> <td>
                                 <div class='form-group row'>
@@ -120,7 +125,7 @@
                                 </div>
                                 </td></tr>";
                             }
-                        }else if($i ==4 && $tab == "購買紀錄"){
+                        }else if($i == 4 && $tab == "購買紀錄"){
                             if($data == 0){
                                 echo "<tr> <td>$field:</td> <td>
                                 <div class='form-group row'>
@@ -136,23 +141,26 @@
                                 </td></tr>";
                             }else{
                                 echo "<tr> <td>$field:</td> <td>
-                                <div class='form-group row'>
+                                <div class='form-group row' name='insertAry[]'>
                                     <div class='form-check form-check-inline'>
-                                        <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio1' value='1' checked>
+                                        <input class='form-check-input' type='radio' id='inlineRadio1' value='1' checked>
                                        <label class='form-check-label' for='inlineRadio1'>是</label>
                                     </div>
                                     <div class='form-check form-check-inline'>
-                                        <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio2' value='0'>
+                                        <input class='form-check-input' type='radio' id='inlineRadio2' value='0'>
                                         <label class='form-check-label' for='inlineRadio2'>否</label>
                                     </div>
                                 </div>
                                 </td></tr>";
                             }
-
-                        }else if($i ==5 && $tab == "會員"){
+                        }else if($i == 5 && $tab == "會員"){
                             echo "<tr> <td>$field:</td> <td><input type='date' name='update[]' value=$data ></td> </tr>";
                         }else{
-                            echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";
+                            if($tab == "購買紀錄" && ($i==1 || $i==3)){
+                                echo "<tr> <td>$field:</td> <td><input type='text' readonly value=$data size='30'></td> </tr>";
+                            }else{
+                                echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";
+                            }
                         }  
                    }
                 }                   

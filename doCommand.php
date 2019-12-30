@@ -165,8 +165,8 @@
                     if ($i != 0)
                         $temp = $temp . ", '" . $data . "'";
                 }
-                $sql = "insert into orderhistory values($temp)";
-                // echo $sql;
+                $sql = "insert into orderhistory (deliveryStaffId, arrived) values($temp)";
+                echo $sql;
                 break;
         }
     }
