@@ -215,7 +215,7 @@
     <script>
         const input = document.querySelectorAll('input');
         var i;
-        // var valid = false;
+        var valid = false;
         console.log(input.length);
         console.log(input);
 
@@ -223,13 +223,18 @@
             for (i = 0; i < input.length; i++) {
                 var value = input[i].value;
                 if(value == "" || value == null){
-                    alert("input cannot be empty!");                
+                    valid = false;             
                     document.getElementById("update").setAttribute("value", "funPage");
+                }else{
+                    valid = true;
                 }
             }
-            // if(valid){
-            //     document.getElementById("update").setAttribute("value", "goSQL");
-            // }
+            if(valid){
+                document.getElementById("update").setAttribute("value", "goSQL");
+            } else{
+                alert("input cannot be empty!");                
+                document.getElementById("update").setAttribute("value", "funPage");
+            }
             // if(input.dataset.state == 'invalid'){
             //     alert("input cannot be empty!");                
             //     document.getElementById("update").setAttribute("value", "funPage");

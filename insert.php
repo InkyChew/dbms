@@ -207,23 +207,46 @@
 
     <script>
         const input = document.querySelectorAll('input');
-        input.addEventListener('input', evt => {
-            const value = input.value.trim();
+        var i;
+        var valid = false;
+        console.log(input.length);
+        console.log(input);
 
-            if (value) {
-                input.dataset.state = 'valid';
-            } else {
-                input.dataset.state = 'invalid';
-            }
-        })
         function check(){
-            if(input.dataset.state == 'invalid'){
+            for (i = 0; i < input.length; i++) {
+                var value = input[i].value;
+                if(value == "" || value == null){
+                    valid = false;             
+                    document.getElementById("update").setAttribute("value", "funPage");
+                }else{
+                    valid = true;
+                }
+            }
+            if(valid){
+                document.getElementById("update").setAttribute("value", "goSQL");
+            } else{
                 alert("input cannot be empty!");                
-                document.getElementById("insert").setAttribute("value", "新增");
-            }else if(input.dataset.state == 'valid'){
-                document.getElementById("insert").setAttribute("value", "goSQL");
+                document.getElementById("update").setAttribute("value", "funPage");
             }
         }
+        // const input = document.querySelectorAll('input');
+        // input.addEventListener('input', evt => {
+        //     const value = input.value.trim();
+
+        //     if (value) {
+        //         input.dataset.state = 'valid';
+        //     } else {
+        //         input.dataset.state = 'invalid';
+        //     }
+        // })
+        // function check(){
+        //     if(input.dataset.state == 'invalid'){
+        //         alert("input cannot be empty!");                
+        //         document.getElementById("insert").setAttribute("value", "新增");
+        //     }else if(input.dataset.state == 'valid'){
+        //         document.getElementById("insert").setAttribute("value", "goSQL");
+        //     }
+        // }
 
         function renew(restNo){
             window.location.href = "insert.php?restNo="+ restNo;
