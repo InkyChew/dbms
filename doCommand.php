@@ -120,10 +120,10 @@
                 $price = $ary[1];
                 $imageURL = $ary[2];
                 $description = $ary[3];
-                // print_r($ary);
                 $sql = "update food
                         set name = '$name', price = '$price', imageURL = '$imageURL', description = '$description'
                         where foodID = $foodNo and restaurantID = $restNo";                 
+                // echo $sql;
                 break;
             case "刪除":
                 $sql = "delete from food where foodID = $foodNo and restaurantID = $restNo";

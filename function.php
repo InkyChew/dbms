@@ -47,8 +47,8 @@
             break;
         case "食物":
             if($mode == "修改"){
-                $ary = array("foodName", "price", "imageURL", "description");
-                $sql = "select name, price, imageURL, description from food where foodID = $foodNo and restaurantID = $restNo";
+                $ary = array("foodId", "foodName", "price", "imageURL", "description");
+                $sql = "select foodId, name, price, imageURL, description from food where foodID = $foodNo and restaurantID = $restNo";
             }else{
                 $ary = array("foodName", "restaurantName", "restaurant-tel", "price", "imageURL", "description");
                 $sql = "select f.name, r.name, r.tel, f.price, f.imageURL, f.description
@@ -95,13 +95,13 @@
                 $field = $ary[$i];
                 if ($i != 0){
                     if ($mode != "修改"){
-                        if($i ==4 && $tab == "會員"){
+                        if($i == 4 && $tab == "會員"){
                             if($data == 0){
                                 echo "<tr> <td>$field:</td> <td>男</td> </tr>";
                             }else{
                                 echo "<tr> <td>$field:</td> <td>女</td> </tr>";
                             }
-                        }else if($i ==4 && $tab == "購買紀錄"){
+                        }else if($i == 4 && $tab == "購買紀錄"){
                             if($data == 0){
                                 echo "<tr> <td>$field:</td> <td>否</td> </tr>";
                             }else{
@@ -169,15 +169,13 @@
                             }
                         }else if($i == 5 && $tab == "會員"){
                             echo "<tr> <td>$field:</td> <td><input type='date' name='update[]' value=$data ></td> </tr>";
+                        }else if($tab == "購買紀錄" && ($i==1 || $i==3)){
+                            echo "<tr> <td>$field:</td> <td><input type='text' readonly value=$data size='30'></td> </tr>";
                         }else{
-                            if($tab == "購買紀錄" && ($i==1 || $i==3)){
-                                echo "<tr> <td>$field:</td> <td><input type='text' readonly value=$data size='30'></td> </tr>";
-                            }else{
-                                echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";
-                            }
-                        }  
+                            echo "<tr> <td>$field:</td> <td><input type='text' name='update[]' value=$data size='30'></td> </tr>";
+                        }
                    }
-                }                   
+                }                  
             }
             echo "</table><br>";
             switch ($mode){
@@ -185,7 +183,7 @@
                     echo "<button type='submit' name='btn' value=$mode>回" . $tab . "查詢</button>&nbsp;<button type='submit' name='btn' value=$tab>回" . $tab . "管理</button>";
                     break;
                 case "修改": 
-                    echo "<button type='submit' name='btn' value='goSQL'>" . "修改" . "</button>&nbsp;";
+                    echo "<button id='update' type='submit' name='btn' value='goSQL' onclick=check()>" . "修改" . "</button>&nbsp;";
                     echo "<button type='submit' name='btn' value=$mode>回" . $tab . "修改</button>&nbsp;<button type='submit' name='btn' value=$tab>回" . $tab . "管理</button>";
                     break;
                 case "刪除":
@@ -209,6 +207,28 @@
 </div>
 </form><br>
 <br>
+
+    <script>
+        const input = document.querySelector('input');
+        input.addEventListener('input', evt => {
+            const value = input.value.trim();
+
+            if (value) {
+                input.dataset.state = 'valid';
+            } else {
+                input.dataset.state = 'invalid';
+            }
+        })
+
+        function check(){
+            if(input.dataset.state == 'invalid'){
+                alert("input cannot be empty!");                
+                document.getElementById("update").setAttribute("value", "funPage");
+            }else if(input.dataset.state == 'valid'){
+                document.getElementById("update").setAttribute("value", "goSQL");
+            }
+        }
+    </script>
 
 </body>
 </html>

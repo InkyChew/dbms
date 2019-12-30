@@ -45,6 +45,10 @@
         case "回主畫面":
             $file = "index";
             break;
+        case "funPage":
+            $tab = $_SESSION['tab'];
+            $file = "function";
+            break;
         default:
             $file = "menu";
             $_SESSION['tab'] = $btn;
