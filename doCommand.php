@@ -146,14 +146,13 @@
         switch ($mode){
             case "修改":
                 $ary = $_SESSION['update'];
-                $deliveryName = $ary[0];
-                $tel = $ary[1];
-                $arrived = $ary[2];
+                $deliveryStaffId = $ary[0];
+                $arrived = $ary[1];
 
-                // print_r($ary);
                 $sql = "update orderhistory
-                        set name = '$name', tel = '$tel', name = '$name', address = '$address'
-                        where orderID = $no";                 
+                        set deliveryStaffId = '$deliveryStaffId', arrived = '$arrived'
+                        where orderID = $no";       
+                // print_r($ary);          
                 break;
             case "刪除":
                 $sql = "delete from orderhistory where orderID = $no";
@@ -165,8 +164,8 @@
                     if ($i != 0)
                         $temp = $temp . ", '" . $data . "'";
                 }
-                $sql = "insert into orderhistory (deliveryStaffId, arrived) values($temp)";
-                echo $sql;
+                $sql = "insert into orderhistory values($temp)";
+                // echo $sql;
                 break;
         }
     }

@@ -148,24 +148,24 @@
                                 echo "<tr> <td>$field:</td> <td>
                                 <div class='form-group row'>
                                     <div class='form-check form-check-inline'>
-                                        <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio1' value='1'>
+                                        <input class='form-check-input' type='radio' name='update[]' id='inlineRadio1' value='1'>
                                        <label class='form-check-label' for='inlineRadio1'>是</label>
                                     </div>
                                     <div class='form-check form-check-inline'>
-                                        <input class='form-check-input' type='radio' name='insertAry[]' id='inlineRadio2' value='0' checked>
+                                        <input class='form-check-input' type='radio' name='update[]' id='inlineRadio2' value='0' checked>
                                         <label class='form-check-label' for='inlineRadio2'>否</label>
                                     </div>
                                 </div>
                                 </td></tr>";
                             }else{
                                 echo "<tr> <td>$field:</td> <td>
-                                <div class='form-group row' name='insertAry[]'>
+                                <div class='form-group row'>
                                     <div class='form-check form-check-inline'>
-                                        <input class='form-check-input' type='radio' id='inlineRadio1' value='1' checked>
+                                        <input class='form-check-input' type='radio' name='update[]' id='inlineRadio1' value='1' checked>
                                        <label class='form-check-label' for='inlineRadio1'>是</label>
                                     </div>
                                     <div class='form-check form-check-inline'>
-                                        <input class='form-check-input' type='radio' id='inlineRadio2' value='0'>
+                                        <input class='form-check-input' type='radio' name='update[]' id='inlineRadio2' value='0'>
                                         <label class='form-check-label' for='inlineRadio2'>否</label>
                                     </div>
                                 </div>
