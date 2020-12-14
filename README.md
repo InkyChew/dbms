@@ -1,4 +1,4 @@
-Document: https://drive.google.com/drive/u/1/folders/1eIYoeMoniCvljOMMIhLgkTlK7xWlYM8t
+Document: https://drive.google.com/file/d/1B7zco5bJwPSzFerMauFR1QHoiPtuOmsn/view?usp=sharing
 
 ## Project setup
 1. clone the file in to :\xampp\htdocs
