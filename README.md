@@ -1,3 +1,5 @@
+Document: https://drive.google.com/drive/u/1/folders/1eIYoeMoniCvljOMMIhLgkTlK7xWlYM8t
+
 ## Project setup
 1. clone the file in to :\xampp\htdocs
 2. use `b10623019hw1.sql` to create a database.
